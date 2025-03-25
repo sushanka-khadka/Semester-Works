@@ -49,9 +49,6 @@ int main(){
 	cout<<string(50,'-')<<endl;
 	float ans =R(4,4);
 	cout<<"By Romberg integration \n\tR(4,4) is:\t"<<ans<<endl;			
-	
-	cout<<endl<<string(35,'_')<<endl;
-	cout<<"Name :Santosh B.K. \tSection : C\nRoll no:76"<<endl;
-	cout<<"Lab no: 7h"<<endl;
+		
 	return 0;
 }

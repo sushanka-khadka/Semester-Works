@@ -44,8 +44,5 @@ int main(){
 	
 	cout<<"\nInterpolation of f(x)=sin(x)/x: "<<com_simpson<<endl;
 	
-cout<<endl<<string(35,'_')<<endl;
-	cout<<"Name :Santosh B.K. \tSection : C\nRoll no:76"<<endl;
-	cout<<"Lab no: 7d"<<endl;
 	return 0;
 }

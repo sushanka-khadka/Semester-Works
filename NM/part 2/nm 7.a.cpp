@@ -27,9 +27,6 @@ int main(){
 	cout<<"\tTrapezodial rule\n";
 	cout<<"Interpolation of f(x) =(x^3+2) at[2,4] is: "<<trapezodial;
 	
-	cout<<endl<<string(35,'_')<<endl;
-	cout<<"Name :Santosh B.K. \tSection : C\nRoll no:76"<<endl;
-	cout<<"Lab no: 7a"<<endl;
-	
+
 	return 0;
 }

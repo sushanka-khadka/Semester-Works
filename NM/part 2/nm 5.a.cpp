@@ -24,10 +24,6 @@ int main(){
 	cout<<"\tForward Diff>\t"<<fd<<endl;
 	cout<<"\tBackward Diff>\t"<<bd<<endl;
 
-	cout<<endl<<string(35,'_')<<endl;
-	cout<<"Name :Santosh B.K. \tSection : C\nRoll no:76"<<endl;
-	cout<<"Lab no: 5a"<<endl;
-	
 	
 	return 0;
 }

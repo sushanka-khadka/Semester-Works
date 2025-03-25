@@ -49,10 +49,7 @@ int main(){
 	for(int i=0;i<m;i++){
 		cout<<"\t"<<X_old[i]<<endl;
 	}
-	cout<<endl;
-	
-	cout<<"Name :Santosh B.K. \tSection : C\nRoll no:76"<<endl;
-	cout<<"Lab no: 13(Power Method)"<<endl;
+
 	return 0;
 }
 
@@ -65,28 +62,3 @@ int main(){
 //The determinant of a 1D matrix is simply the value of the single element in the matrix. Therefore, the determinant of matrix (A) is:
 //Determinant(A)=a1
 
-/*
-	cout<<"A\n";
-	print_mat(A,3);
-	cout<<"X_old\n";
-	print_eig(X_old,3);
-	cout<<"Eigen value: "<<k<<endl;
-	cout<<"X_eig\n";
-	print_eig(X_eig,3);
-
-
-void print_eig(float X[3],int m){
-	for(int i=0;i<m;i++){
-		cout<<X[i]<<endl;
-	}
-}
-void print_mat(float mat[3][3],int m){
-	for(int i=0;i<m;i++){
-		for(int j=0;j<m;j++){
-			cout<<mat[i][j]<<"\t";
-		}
-		cout<<endl;
-	}
-}
-	
-*/

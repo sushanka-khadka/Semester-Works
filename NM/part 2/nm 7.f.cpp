@@ -36,8 +36,5 @@ int main(){
 	
 	cout<<"\nInterpolation of f(x)=1/(x+4): "<<com_simpson<<endl;
 	
-	cout<<endl<<string(35,'_')<<endl;
-	cout<<"Name :Santosh B.K. \tSection : C\nRoll no:76"<<endl;
-	cout<<"Lab no: 7f"<<endl;
 	return 0;
 }

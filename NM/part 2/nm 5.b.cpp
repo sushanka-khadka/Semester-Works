@@ -22,10 +22,7 @@ int main(){
 	cout<<"\t1st :\t"<<first<<endl;
 	cout<<"\t2nd :\t"<<second<<endl;
 	
-	cout<<endl<<string(35,'_')<<endl;
-	cout<<"Name :Santosh B.K. \tSection : C\nRoll no:76"<<endl;
-	cout<<"Lab no: 5b"<<endl;
-	
+
 	return 0;
 }
 //Backward Difference Formula mostly used for Right end points:

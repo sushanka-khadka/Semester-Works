@@ -86,9 +86,6 @@ int main(){
 	cout<<string(10,'*')<<endl;
 	
 	div_diff(x);
-	cout<<endl<<string(35,'_')<<endl;
-	cout<<"Name :Santosh B.K. \tSection : C\nRoll no:76"<<endl;
-	cout<<"Lab no: 6c"<<endl;
 	
 	return 0;
 }

@@ -50,8 +50,5 @@ int main(){
 	GaussQuadature(a,b,2);
 	GaussQuadature(a,b,3);
 	
-	cout<<endl<<string(35,'_')<<endl;
-	cout<<"Name :Santosh B.K. \tSection : C\nRoll no:76"<<endl;
-	cout<<"Lab no: 7g"<<endl;
 	return 0;
 }

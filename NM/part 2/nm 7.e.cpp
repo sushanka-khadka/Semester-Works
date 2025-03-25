@@ -25,8 +25,5 @@ int main(){
 	
 	cout<<"\nInterpolation of f(x)=sqrt(1-x*x): "<<simpson<<endl;
 	
-	cout<<endl<<string(35,'_')<<endl;
-	cout<<"Name :Santosh B.K. \tSection : C\nRoll no:76"<<endl;
-	cout<<"Lab no: 7e"<<endl;
 	return 0;
 }

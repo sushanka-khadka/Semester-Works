@@ -78,29 +78,6 @@ int main(){
 	cout<<string(10,'*')<<endl;
 	div_diff(x);
 	
-		
-cout<<endl<<string(35,'_')<<endl;
-	cout<<"Name :Santosh B.K \tSection : C\nRoll no:76"<<endl;
-	cout<<"Lab no: 6a"<<endl;
-	
+			
 	return 0;
 }
-
-
-
-//
-//int main(){
-//	int n=5;
-//	for(int i=2;i<n-1;i++){
-//		float factor =1;
-//		for(int j=0;j<=n-1;j++){
-//			for(int k=0;k<=n-1;k++){
-//				if(j!=k){
-//					factor *= (x-x[k]);
-//				}
-//				sum +=ddf[0];
-//			}			
-//		}		
-//	}		
-//	return 0;
-//}
