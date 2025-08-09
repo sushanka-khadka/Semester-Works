@@ -23,6 +23,7 @@ This repositroy is a collection of my academic works.
   <summary>5th sem</summary>  
   <ul>
     <li><a href="https://github.com/sushanka-khadka/Semester-Works/tree/main/DAA">DAA</a></li>
-    <li><a href="https://github.com/sushanka-khadka/Semester-Works/tree/main/Crypto">Crypto</a></li>    
+    <li><a href="https://github.com/sushanka-khadka/Semester-Works/tree/main/5th%20sem/Crypto">Crypto</a></li>    
   </ul>
 </details>
+
