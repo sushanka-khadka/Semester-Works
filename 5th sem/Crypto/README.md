@@ -1,2 +1,2 @@
 ### Questions
-![questions](Crypto/Others/lab-qsn.png)
+![questions](Others/lab-qsn.png)
