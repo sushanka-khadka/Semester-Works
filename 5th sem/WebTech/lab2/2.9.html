@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lab 2.9</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        .container{
+            display: flex;
+        }
+
+        .container1, .container2{
+            border: 3px solid; 
+            width: 50%;
+            padding: 5px;
+            margin: 5px;
+            height: 300px;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container1{
+            box-shadow: inset 0 0 10px black;
+            border-image: linear-gradient(60deg, red, blue) 1;
+        }
+
+        .container2{
+            box-shadow: inset 0 0 20px red;
+            border-radius: 20px;
+        }
+
+        p{
+            text-overflow: ellipsis;
+            word-wrap: break-word;
+            text-shadow: 2px 2px 5px yellow;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="container1">
+            <h1 class="heading1">
+                This is a heading
+            </h1>
+    
+            <p class="para1">This is a paragraph. Lorem ipsum dolor sit amet 
+                consectetur adipisicing elit. Illum esse sunt 
+                iure temporibus dolorum obcaecati animi 
+                possimus nemo debitis atque!</p>
+        </div>`
+    
+        <div class="container2">
+            <h1 class="heading2">This is a heading</h1>
+    
+            <p class="para2">This is a paragraph</p>
+        </div>
+    </div>
+    
+</body>
+</html>

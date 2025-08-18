@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lab 2.6</title>
+    <style>
+        .custom-image li{
+            list-style: url('') no-repeat;
+        }
+
+        .custom-square{
+            list-style: square;
+        }
+
+        .roman-numbers{
+            list-style-type: upper-roman;
+        }
+
+        .lower-alpha{
+            list-style-type: lower-alpha;
+        }
+
+        .styled-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .styled-table th, .styled-table td {
+            border: 1px solid black;
+            padding: 10px;
+            text-align: left;
+        }
+
+        .styled-table tbody tr:nth-child(odd) {
+            background-color: #f2f2f2;
+        }
+
+        .styled-table thead {
+            background-color: #333;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <h1>Lists and Tables</h1>
+
+    <ul class="custom-image">
+        <li>Item 1</li>
+        <li>Item 2</li>
+        <li>Item 3</li>
+    </ul>
+
+    <ul class="custom-square">
+        <li>Item A</li>
+        <li>Item B</li>
+        <li>Item C</li> 
+    </ul>
+
+    <ol class="roman-numbers">
+        <li>Alpha</li>
+        <li>Beta</li>
+        <li>Gamma</li>
+    </ol>
+
+    <ol class="lower-alpha">
+        <li>One</li>
+        <li>Two</li>
+        <li>Three</li>
+    </ol>
+
+    <table class="styled-table">
+        <thead>
+            <tr>
+                <th>Header 1</th>
+                <th>Header 2</th>
+                <th>Header 3</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Row 1, Cell 1</td>
+                <td>Row 1, Cell 2</td>
+                <td>Row 1, Cell 3</td>
+            </tr>
+            <tr>
+                <td>Row 2, Cell 1</td>
+                <td>Row 2, Cell 2</td>
+                <td>Row 2, Cell 3</td>
+            </tr>
+            <tr>
+                <td>Row 3, Cell 1</td>
+                <td>Row 3, Cell 2</td>
+                <td>Row 3, Cell 3</td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

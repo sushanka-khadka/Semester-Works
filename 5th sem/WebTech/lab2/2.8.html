@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Positioning and Display</title>
+    <style>
+        /* Relative Positioning */
+        .relative-box {
+            position: relative;
+            left: 50px;
+            top: 20px;
+            background-color: lightblue;
+            padding: 10px;
+            border: 1px solid blue;
+        }
+
+        /* Float Property */
+        .float-container {
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .float-box {
+            width: 30%;
+            float: left;
+            margin: 10px;
+            padding: 20px;
+            background-color: lightgreen;
+            text-align: center;
+            border: 1px solid green;
+        }
+
+        /* Relative Parent with Absolute Child */
+        .relative-parent {
+            position: relative;
+            width: 300px;
+            height: 200px;
+            background-color: lightcoral;
+            margin-top: 20px;
+            padding: 10px;
+            border: 2px solid red;
+        }
+
+        .absolute-child {
+            position: absolute;
+            top: 50px;
+            left: 50px;
+            background-color: white;
+            padding: 10px;
+            border: 1px solid black;
+        }
+
+        /* Display Property Examples */
+        .block-box {
+            display: block;
+            width: 200px;
+            background-color: yellow;
+            padding: 10px;
+            margin: 10px;
+            border: 1px solid orange;
+        }
+
+        .inline-box {
+            display: inline;
+            background-color: lightgray;
+            padding: 5px;
+            border: 1px solid gray;
+        }
+
+        .inline-block-box {
+            display: inline-block;
+            width: 150px;
+            background-color: lightpink;
+            padding: 10px;
+            margin: 10px;
+            border: 1px solid pink;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>CSS Positioning and Display</h1>
+
+    <!-- Relative Positioning -->
+    <div class="relative-box">This div is positioned relative to its original position.</div>
+
+    <!-- Float Property -->
+    <div class="float-container">
+        <div class="float-box">Box 1</div>
+        <div class="float-box">Box 2</div>
+        <div class="float-box">Box 3</div>
+    </div>
+
+    <!-- Relative Parent with Absolute Child -->
+    <div class="relative-parent">
+        Parent Div
+        <div class="absolute-child">Child Div</div>
+    </div>
+
+    <!-- Display Property Examples -->
+    <div class="block-box">Block Element</div>
+    <span class="inline-box">Inline Element</span>
+    <div class="inline-block-box">Inline-Block Element</div>
+</body>
+
+</html>
