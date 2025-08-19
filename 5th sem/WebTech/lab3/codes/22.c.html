@@ -1,0 +1,45 @@
+<script>
+    // creaing object using object literal syntax
+    player= {
+        name: 'messi',
+        age: 38,
+        country: 'argentina',
+        club: 'inter miami'
+    }
+    // add new property to object
+    player.foot = 'left';
+    player.show= function(){
+        console.log(this.name + ' ' + this.age + ' ' + this.country + ' ' + this.club + ' ' + this.foot);
+    }        
+    player.show();
+
+    // creating instance of object using new keywored
+    house = new Object();
+    house.color = 'red';
+    house.size = 'big';
+    house.location = 'newyork';
+    house['rooms'] = 5;
+    house.show = function(){
+        console.log(this.color + ' ' + this.size + ' ' + this.location + ' ' + this.rooms);
+    }
+    house.show();
+
+    // deleting property from object
+    delete house.location
+    console.log(house.location); // undefined
+    
+    // creating object using constructor function   
+    function Car(model, year, fuel){
+        this.model = model;
+        this.year = year;
+        this.fuel = fuel;
+        this.show = function(){
+            console.log(this.model + ' ' + this.year + ' ' + this.fuel);
+        }
+    }
+    // creating many instances of object using constructor function
+    toyata = new Car('toyota', 2020, 'petrol');
+    honda = new Car('honda', 2021, 'diesel');
+    tesla= new Car('tesla', 2022, 'electric');
+    toyata.show();
+</script>

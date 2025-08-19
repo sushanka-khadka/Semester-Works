@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        let num= Math.abs(parseInt((prompt("Enter any integer: "))));
+        let digitCount=0;
+        const n= num;
+        while (num > 0){
+            num = Math.floor(num/10);
+            digitCount++;
+            document.write(digitCount + "<br>");
+        }
+        if (digitCount == 1 | digitCount == 0){
+            alert(`${n} is a single digit number.`);
+        } else if (digitCount == 2){
+            alert(`${n} is a double digit number.`);
+        } else if (digitCount == 3){
+            alert(`${n} is a three digit number.`);
+        } else {
+            alert(`${n} is a multi digit number.`);
+        }
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

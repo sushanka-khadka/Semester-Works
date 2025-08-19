@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function func1(){
+            document.write("I am invoked <b>normal definition</b><br>");
+        }
+
+        const func2= function(){
+            document.write('I am invoked <b>function expression</b><br>')
+        }
+
+        const func3= ()=> {
+            document.write('I am invoked <b>arrow function</b><br>')
+        }
+
+        const func4= (a,b) => {
+            return a+b;
+        }
+        const func5= (a,b) => a%b; // single line arrow function
+        
+        func1(); // normal function invocation
+        func2(); // function expression invocation
+        func3(); // arrow function invocation
+        document.write(`Sum of 2 and 3 is: ${func4(2,3)}<br>`); // normal function invocation
+        document.write(`Modulus of 31 and 11 is: ${func5(31,11)}<br>`); // single line arrow function invocation
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

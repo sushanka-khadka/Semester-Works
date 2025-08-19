@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Array and JavaScript Tasks</title>
+</head>
+<body>
+    <h2>Open your browser console to view output</h2>
+
+    <script>
+        // 1. array1: 10 natural numbers using initialization
+        let array1 = [1,2,3,4,5,6,7,8,9,10];
+
+        // 2. array2: 10 float numbers taken via prompt
+        let array2 = [];
+        for(let i=0; i<10; i++) {
+            let num = parseFloat(prompt(`Enter floating point number ${i+1}:`));
+            array2.push(num);
+        }
+
+        // 3. array3: empty array
+        let array3 = [];
+
+        // Sum of elements in array1 and check if divisible by 7
+        let sum1 = 0;
+        for(let i=0; i<array1.length; i++) {
+            sum1 += array1[i];
+        }
+        if(sum1 % 7 === 0){
+            alert(`Sum of array1 is ${sum1}, and it IS divisible by 7`);
+        } else {
+            alert(`Sum of array1 is ${sum1}, and it is NOT divisible by 7`);
+        }
+
+        // Add two elements at the end of array2
+        console.log("array2 before push:", [...array2]);        // This creates a new array with the current values at the time of logging.
+
+
+        array2.push(99.9, 88.8);
+        console.log("array2 after push:", [...array2]);
+
+        // Delete first element
+        array2.shift();
+        console.log("array2 after shift (remove first):", [...array2]);
+
+        // Sum of digits of number (e.g., 1457 => 1+4+5+7 = 17)
+        let numInput = prompt("Enter a number to calculate sum of digits:");
+        let sumDigits = 0;
+        let temp = parseInt(numInput);
+        while(temp !== 0) {
+            sumDigits += temp % 10;
+            temp = Math.floor(temp / 10);
+        }
+        alert(`Sum of digits = ${sumDigits}`);
+
+        // Take numbers using prompt + confirm until user stops, then sum them
+        let totalSum = 0;
+        let input;
+        do {
+            input = parseFloat(prompt("Enter a number:"));
+            totalSum += input;
+        } while (confirm("Do you want to enter another number?"));
+        alert(`Total sum of entered numbers: ${totalSum}`);
+
+        // Use 10 array methods on array3
+        console.log("Initial array3:", array3);
+        array3.push(10);                   // 1. push
+        array3.push(20, 30);               // 2. push
+        array3.unshift(5);                 // 3. unshift
+        array3.pop();                      // 4. pop
+        array3.splice(1, 0, 15);           // 5. splice
+        array3[1] = 17;                    // 6. modify directly
+        let sliced = array3.slice(0, 2);   // 7. slice
+        let mapped = array3.map(x => x * 2); // 8. map
+        let index = array3.indexOf(20);   // 9. indexOf
+        array3.sort((a,b)=>a-b);          // 10. sort
+        console.log("Final array3:", array3);
+        console.log("Sliced:", sliced);
+        console.log("Mapped (doubled):", mapped);
+        console.log("Index of 20:", index);
+
+        // Use forEach on array2
+        console.log("Using forEach on array2:");
+        array2.forEach((value, index) => {
+            console.log(`array2[${index}] = ${value}`);
+        });
+
+        // Use for-of and for-in on array1
+        console.log("Using for-of on array1:");
+        for(let val of array1){
+            console.log(val);
+        }
+
+        console.log("Using for-in on array1:");
+        for(let index in array1){
+            console.log(`Index ${index} = ${array1[index]}`);
+        }
+    </script>
+</body>
+</html>
