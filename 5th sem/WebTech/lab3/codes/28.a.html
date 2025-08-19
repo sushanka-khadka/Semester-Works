@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Objects</title>
+</head>
+<body>
+    <h3>JS document.forms</h3>
+    <form name="myForm">
+        <label>Name: 
+            <input type="text" name= 'name' id="username">
+        </label>
+        <label>Email: 
+            <input type="email" name="email" id="email">
+        </label>
+        <button type="button" onclick="displayFormDate()">Submit</button>
+    </form>
+    <div id="output"></div>
+
+    <script>
+        function displayFormDate(){
+            // access form using doucment.forms
+            let form= document.forms['myForm']
+
+            // get values from the form fields
+            let name= form['username'].value;
+            let email= form['email'].value
+
+            // display 
+            document.getElementById('output').innerHTML= 
+            'Name: ' + name + '<br>Email: ' + email;
+        }
+    </script>
+</body>
+</html>

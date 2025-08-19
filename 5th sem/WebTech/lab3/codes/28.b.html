@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Form</title>
+    <link rel="stylesheet" href="28.b.css">
+    <script defer src="28.b.js"></script>
+</head>
+<body>
+    <h3>Registration Form</h3>
+    <!--With POST, form data is sent in the HTTP body, not visible in the URL.
+    GET method appends form data to the URL as query parameters (?key=value format). Sensitive data being exposed in the URL (like passwords ❌) -->
+    <form id="registrationForm" method="post"> 
+        <label>First Name*: 
+            <input type="text" name="fname" id="fname">
+        </label>
+        <span class="error" id="fnameError"></span><br>
+
+        <label>Last Name: 
+            <input type="text" name="lname" id="lname">
+        </label>
+        <span class="error" id="lnameError"></span><br>
+
+        <label>Date of Birth*: 
+            <input type="date" name="dob" id="dob">
+        </label>
+        <span class="error" id="dobError"></span><br>
+
+        <label>Gender*:
+            <select id="gender">
+                <option value="">----Select----</option>
+                <option>Male</option>
+                <option>Female</option>
+                <option>Other</option>
+            </select>
+        </label>
+        <span class="error" id="genderError"></span><br>
+
+        <label>Province*:
+            <select id="province">
+                <option value="">----Select----</option>
+                <option>Province 1</option>
+                <option>Province 2</option>
+                <option>Bagmati</option>
+                <option>Gandaki</option>
+                <option>Lumbini</option>
+                <option>Karnali</option>
+                <option>Sudurpashchim</option>
+            </select>
+        </label>
+        <span class="error" id="provinceError"></span><br>
+
+        <label>Cell Phone*: 
+            <input type="number" name="phone" id="phone">
+        </label>
+        <span class="error" id="phoneError"></span><br>
+
+        <label>Email: 
+            <input type="text" name="email" id="email">
+        </label>
+        <span class="error" id="emailError"></span><br>
+
+        <label>User Name*: <input type="text" id="username"></label>
+        <span class="error" id="usernameError"></span><br>
+
+        <label>Password*: <input type="password" id="password"></label>
+        <span class="error" id="passwordError"></span><br>
+
+        <label>Confirm Password*: 
+            <input type="password" name="confirmPass" id="confirmPass">
+        </label>
+        <span class="error" id="confirmPassError"></span><br>
+
+        <button type="submit">Register</button>
+    </form>
+    
+</body>
+</html>
