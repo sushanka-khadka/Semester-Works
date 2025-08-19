@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Calculate your age</h1>    
+    <label for="birth_date">Enter your birth date:</label>    
+    <input type="date" id="birth_date" value="2017-10-24" min="1900-01-01"/><br>
+    <button onclick="getDate()">Submit</button>
+    <p id="years"> </p>
+    <p id="full-age"> </p>
+    <br>
+    <script>
+        document.getElementById("birth_date").max= new Date().toISOString().split('T')[0]; // Set max date to today
+        function getDate(){
+            const birth_date= document.getElementById('birth_date').value;
+            const b_date_obj= new Date(birth_date);
+            const today= new Date();
+            let age= today.getFullYear() - b_date_obj.getFullYear();
+            let month= today.getMonth() - b_date_obj.getMonth();
+            let day= today.getDate() - b_date_obj.getDate();
+            
+            if (month < 0 || (month ===0 && day < 0)){   // few months shorter than a year
+                age--;
+                month+= 12;
+            }
+            if (day < 0){   // few days shorter than a month
+                month --;
+                const lastMonth = new Date(today.getFullYear(), today.getMonth(), 0);
+                day+= lastMonth.getDate();
+            }
+        
+            document.getElementById("years").innerHTML= `You're <b>${age}</b> years old.`;
+            document.getElementById("full-age").innerHTML= `You're <b>${age}</b> years, <b>${month}</b> months and <b>${day}</b> days old.`;
+        }
+        
+    </script>
+</body>
+</html>

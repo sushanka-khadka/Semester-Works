@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stopwatch</title>
+    <style>
+        #container {            
+            text-align: center;
+            font-family: Arial, sans-serif;
+            border: 2px solid #000;  
+            width: 50%;
+            justify-self: center;
+        }
+
+        #watch {
+          font-size: 2em;
+          margin-bottom: 10px;
+        }
+        button {
+          margin-right: 5px;
+          padding: 8px 12px;
+        }
+        #lapsContainer {
+            margin: 20px;            
+            text-align: center;            
+            /* border: 2px solid #000; */
+
+        }
+        ol{
+            list-style-position: inside;            
+            padding: 0;
+            margin: 20px;
+        }
+        
+      </style>
+</head>
+<body>
+    <div id ="container">
+        <h1>Stopwatch</h1>
+        <div id="watch"> </div>
+        <div id="buttons">
+            <button id="toggle" onclick="toggleWatch()">Start</button>
+            <!-- <button id="stop" onclick="stopWatch()">Stop</button> -->
+            <button id="reset" onclick="resetWatch()">Reset</button>
+            <button id="lap" onclick="lapTime()">Lap</button>                    
+        </div>    
+        <div id="lapsContainer">
+            <h3>Laps</h3>
+            <ol id="laps"> </ol>
+        </div>
+    </div>
+    
+    <script>
+        let hours=0, minutes=0, seconds = 0;
+        let interval = null; // Variable to store the interval ID
+        document.getElementById('watch').innerHTML = `00:00:00`;
+        function updateWatch() {           
+            seconds ++; // increment seconds by 1
+            if (seconds === 60) {
+                seconds = 0; // reset seconds to 0
+                minutes ++; // increment minutes by 1
+
+                if (minutes === 60) {
+                    minutes = 0; // reset minutes to 0
+                    hours ++; // increment hours by 1
+
+                    if (hours === 2) {
+                        hours = 0; // reset hours to 0
+                    }
+                }
+            }
+            
+            const formattedTime= 
+                hours.toString().padStart(2, '0') + ':' +
+                minutes.toString().padStart(2, '0') + ':' +
+                seconds.toString().padStart(2, '0'); // format the time as HH:MM:SS     
+                    
+            document.getElementById('watch').innerHTML = formattedTime; // update the watch display`;
+        }
+
+        function toggleWatch() {            
+            toggleButton= document.getElementById('toggle'); // Get the start button element
+            
+            if (!interval) { // Start the stopwatch only if it’s not already running.
+                interval = setInterval(updateWatch, 1000); // call updateWatch every second
+                toggleButton.textContent = 'Pause'; // Change the button text to "Pause"                
+            }
+            else {
+                stopWatch(); // Call the stopWatch function to stop the stopwatch
+                toggleButton.textContent = 'Resume'; // Change the button text back to "Start"
+            }
+        }
+
+        function stopWatch() {
+            clearInterval(interval); // Stop the stopwatch
+            interval = null; // Reset the interval variable
+        }
+
+        function resetWatch() {
+            stopWatch(); // Stop the stopwatch
+            hours= minutes = seconds = 0; // Reset hours, minutes, and seconds to 0
+            document.getElementById('toggle').textContent = 'Start'; // Change the button text back to "Start"
+            document.getElementById('watch').textContent= '00:00:00'; // Update the display to show 00:00:00
+            document.getElementById('laps').textContent = ``;
+        }
+
+        function lapTime() {
+            const lapTime= document.getElementById('watch').textContent; // Get the current time from the stopwatch display
+            const li= document.createElement('li'); // Create a new list item for the lap time
+            li.textContent= lapTime; // Set the text content of the list item to the current time
+            document.getElementById('laps').appendChild(li); // Append the new list item to the laps list           
+
+        }
+    </script>
+</body>
+</html>

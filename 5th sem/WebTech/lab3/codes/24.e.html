@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    function displayBeforeAfter(dateStr, days, hours) {
+      const givenDate = new Date(dateStr);
+      
+      // Create a copy of the date to manipulate
+      const msInHour = 60 * 60 * 1000;
+      const msInDay = 24 * msInHour;
+      const offsetMs = (days * msInDay) + (hours * msInHour);
+      
+      const beforeDate = new Date(givenDate.getTime() - offsetMs);
+      const afterDate = new Date(givenDate.getTime() + offsetMs);
+
+      console.log("Given Date and Time:", givenDate.toString());
+      console.log(`Before (${days} days, ${hours} hours):`, beforeDate.toString());
+      console.log(`After (${days} days, ${hours} hours):`, afterDate.toString());
+    }
+
+    // Example usage:
+    const inputDate = "2025-04-10T14:30"; // ISO format works best
+    const days = 2;
+    const hours = 5;
+
+    displayBeforeAfter(inputDate, days, hours);
+  </script>
+  
+</body>
+</html>

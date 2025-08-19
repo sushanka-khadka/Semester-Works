@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        d= new Date()
+        document.write(`Today's date: ${d}<br> 
+        <br>Getter Methods: <br> 
+        milli-seconds: ${d.getTime()}<br>  
+        Day of month: ${d.getDate()}<br> 
+        Day of week: ${d.getDay()}<br> 
+        Full Year: ${d.getFullYear()}<br> 
+        JSON: ${d.toJSON()}<br>`)
+
+        document.write(`<br>Setter Methods: <br>`)
+        d.setFullYear(2030)
+        d.setDate(2)
+        d.setMonth(11)
+        document.write(`Date: ${d}<br>`)
+        document.write('<br>Note: some getter setter methods works on index<br>')
+    </script>
+</body>
+</html>
