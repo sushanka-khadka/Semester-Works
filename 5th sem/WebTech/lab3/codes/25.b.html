@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input[type="numeric"] {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            padding: 10px 15px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #218838;
+        }
+    </style>
+
+</head>
+<body>    
+    <label for="num1">Number 1</label>
+    <input type="numeric" id="num1" placeholder="Enter any number" required><br>
+    <label for="num2">Number 2</label>
+    <input type="numeric" id="num2" placeholder="Enter any number" required><br>
+
+    <button id="add" onclick="Add()">Add</button>
+    <button id="substract" onclick="Substract()">Substract</button>
+    <button id="multiply" onclick="Multiply()">Multiply</button>
+
+    <script>
+        function getValues() {
+            num1= parseFloat(document.getElementById("num1").value);
+            num2= parseFloat(document.getElementById("num2").value);
+            
+            if (isNaN(num1) || isNaN(num2)) {
+                alert("Please enter valid numbers in both fields.");
+                return;
+            }
+        }        
+        
+        function Add(){
+            getValues(); // Call the function to get the values before performing the operation
+            alert("The sum is: " + (num1 + num2));
+        }
+
+        function Substract() {
+            getValues(); // Call the function to get the values before performing the operation
+            alert("The difference is: " + (num1 - num2));
+        }
+
+        function Multiply() {
+            getValues(); // Call the function to get the values before performing the operation
+            alert("The product is: " + (num1 * num2));
+        }
+        // Add event listeners to the buttons
+    </script>
+    
+</body>
+</html>

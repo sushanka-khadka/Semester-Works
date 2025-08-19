@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Web Page</title>
+    <style>
+        body {
+          font-family: Arial, sans-serif;
+          padding: 20px;
+          transition: background-color 0.3s ease;
+        }
+    
+        .color-options {
+          margin-bottom: 20px;
+        }
+    
+        img {
+          max-width: 300px;
+          display: block;
+          margin-bottom: 10px;
+          cursor: pointer;
+        }
+    
+        #description {
+          display: none;
+          font-style: italic;
+        }
+      </style>
+</head>
+<body>
+    <h3>Change Background Color</h3>
+
+    <div class="color-options">
+        <label><input type="radio" name="bgColor" value="lightblue">Light Blue</label>
+        <label><input type="radio" name="bgColor" value="lightgreen">Light Green</label>
+        <label><input type="radio" name="bgColor" value="lightcoral">Light Coral</label>
+    </div>
+
+    <h3>Hover to See Description</h3>
+    <img id="dogImg" src="https://images.pexels.com/photos/1108099/pexels-photo-1108099.jpeg">
+    <p id="description">This is a sample image used for demonstration. Hovering reveals this text.</p>
+
+    <script>
+        // background color change
+        const radios = document.querySelectorAll("input[name='bgColor']")
+        radios.forEach(radio => {
+            radio.addEventListener('change', function (){
+                document.body.style.backgroundColor = this.value
+            })
+        })
+
+        // show/hide description on hover
+        const image= document.getElementById('dogImg')
+        const desc= document.getElementById('description')
+
+        image.addEventListener('mouseover', () =>{
+            desc.style.display = 'block'
+        }) 
+
+        image.addEventListener('mouseout', () =>{
+            desc.style.display = 'none'
+        }) 
+    </script>
+</body>
+</html>

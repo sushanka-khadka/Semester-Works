@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Event Registration in JavaScript</title>
+  <style>
+    button {
+      margin: 10px;
+      padding: 10px 20px;
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Event Registration Methods (Click each button)</h2>
+
+  <!-- 1. Inline HTML Event Attribute -->
+  <button onclick="alert('Clicked via HTML attribute')">Click (HTML Attribute)</button>
+
+  <!-- 2. DOM Element Property (set via JS) -->
+  <button id="btnProperty">Click (DOM Property)</button>
+
+  <!-- 3. addEventListener Method -->
+  <button id="btnListener">Click (addEventListener)</button>
+
+  <script>
+    // 2. Registering with DOM element property
+    document.getElementById('btnProperty').onclick = function () {
+      alert('Clicked via DOM property');
+    };
+
+    // 3. Registering with addEventListener
+    document.getElementById('btnListener').addEventListener('click', function () {
+      alert('Clicked via addEventListener');
+    });
+  </script>
+
+</body>
+</html>

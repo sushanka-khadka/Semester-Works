@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        form{
+            padding: 10px;
+            border: 2px solid;
+            width: 400px;
+        }
+
+        #log{
+            border: 1px solid;
+            background-color: rgb(221, 221, 218);
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <h3>Form Event Handelling</h3>    
+        <form onsubmit="FormEvent('submit'); return false">
+            Field1:
+            <input type="text" onfocus="FormEvent('focus')" onblur="handleBlur()" oninput="FormEvent('input')" onchange="handleChange()"
+            onsubmit="FormEvent('submit')" value="form events"/>
+            <!-- <br><br> -->
+            
+            <button type="submit">Submit</button>
+            <p id="par1"> </p>
+        </form>
+    </div>
+
+    <div>
+        <h3>Document/Window Event Handelling</h3>
+        <p>Resize the window or reload/close the page.
+        <a href="https://www.google.com">leave the page</a>
+        </p>
+    </div>
+    <div id="log"></div>
+
+    <script>
+        let changed= false
+        function handleChange() {
+            changed= true
+            FormEvent('change')
+        }
+
+        function handleBlur() {
+            if(!changed)
+                FormEvent('blur')
+            changed= false
+        }
+
+        function FormEvent(action){
+            let info;
+            if (action == 'focus')
+                info = `<b>Event : onfocus</b><br>When the user focuses on an element.`
+            else if (action == 'blur')
+                info = `<b>Event : onblur</b><br>When the focus is away from a form element.`
+            else if (action == 'input')
+                info = `<b>Event : oninput</b><br>When the user is typing...`
+            else if(action == 'change')
+                info = `<b>Event : onchange</b><br>When the user modifies or changes the value of a form element.`
+            else if(action == 'submit')
+                info = `<b>Event : onsubmit</b><br>When the user submits the form.`
+            else  
+                info = `<b>Warning</b><br>No such event defined.`
+            document.getElementsByTagName('p')[0].innerHTML= info;
+        }            
+
+        const logDiv = document.getElementById('log')
+        function log(message){
+            const p= document.createElement('p');
+            p.textContent= message
+            logDiv.appendChild(p)            
+        }
+        
+        //load event 
+        window.onload= () => {
+            log('✅ Window Loaded!')
+        };
+
+        window.onbeforeunload= ()=> {                        
+            return 'are you sure to leave the page'
+        };
+
+        window.onresize = ()=> {
+            log(`📏 Window resized: ${window.innerWidth} x ${window.innerHeight}`)
+        };
+
+        // window.addEventListener('load', () => log('✅ Window Loaded!'));
+
+
+        
+    </script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Highlighting Long Words</title>
+    <style>
+        .highlight{
+            background-color: yellow;
+        }
+    </style>
+</head>
+<body>
+    <h3>Paragraph</h3>
+    <p id="p1">
+        JavaScript is a powerful programming language commonly used in web development to create interactive and dynamic user experiences.
+    </p>
+
+    <button onclick="highlightLongWords()">Highlight Long Words</button>
+
+    <script>
+        function highlightLongWords(){
+            const para = document.getElementById('p1')
+            const words= para.innerText.split(/\s+/)
+
+            const highlighted= words.map(word => {
+                if(word.length > 8){
+                    return `<span class='highlight'>${word}</span>`
+                }else{
+                    return word
+                }
+            })
+
+            para.innerHTML= highlighted.join(' ')
+        }
+    </script>
+
+</body>
+</html>

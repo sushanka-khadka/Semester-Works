@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advertisement Popup</title>
+    <style>        
+        body{
+            font-family: Arial, Helvetica, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* overlay for ad */
+        #adOverlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+
+        #adContainer {
+            position: relative;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;            
+        }
+
+        #adContainer img {
+            width: 300px;
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        #closeBtn{
+            position: absolute;
+            top: 5px;
+            right: 10px;
+            font-size: 18px;
+            background-color: red;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            cursor: pointer;
+        }
+
+        /* hides content initially */
+        #mainContent{
+            display: none;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <!-- advertisement overlay -->
+    <div id="adOverlay">
+        <div id="adContainer">
+            <button id="closeBtn">&times</button>     <!-- close button -->
+            <img src="https://images.pexels.com/photos/1108099/pexels-photo-1108099.jpeg" alt="Advertisement" height="250px">
+            <p>Paws For Compassion</p>
+        </div>
+    </div>
+
+    <!-- main page content  -->
+     <div id="mainContent">
+        <h1>Welcome to My Website</h1>
+        <p>This is the main content of my webpage.</p>
+     </div>
+
+     <script>
+        document.getElementById('closeBtn').addEventListener('click', () => {
+            document.getElementById('adOverlay').style.display = 'none'
+            document.getElementById('mainContent').style.display = 'block'
+        })
+     </script>
+
+
+</body>
+</html>
