@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h4>Ways of creating Regular Expression</h4>
+    <p>1. Using the RegExp constructor new RegExp() <br>2. Using the literal notation <strong>/pattern/</strong> </p>
+    <p>check console for regular expression in work.</p>
+    
+    <script>
+        let pattern= '(a.c)d'
+        let regex= new RegExp(pattern, 'i')
+        let text= 'eAxcdbraycdew'
+        console.log('Using regex Constructor')
+        console.log('without global flag: ',
+            regex.exec(text), regex.exec(text))
+
+        // with global flag
+        regex= new RegExp(pattern, 'gi')
+        console.log('with global flag: ',
+            regex.exec(text), regex.exec(text), regex.exec(text))
+        console.log('is search found:' ,regex.test(text))
+
+        text= 'thiS IS thesis.'        
+        
+        console.log('Using String Literal')
+        
+        console.log('match() method',text.match(/is/gi))
+        for (item of text.matchAll(/is/gi)){
+            console.log(item)
+        }
+
+        // using search() on string literal
+        console.log('found at: ', text.search(/is/i))
+
+        // using replace and replaceAll method
+        console.log(text.replace(/[a-z]/, '0'))
+        // search with global flag(/g) is similar to replaceAll()
+        console.log(text.replace(/is/gi, '--'))
+        console.log(text.replaceAll(/is/gi, '00'))
+
+        console.log('1-22-333-4444'.split(/-/))        
+
+    </script>
+    
+</body>
+</html>

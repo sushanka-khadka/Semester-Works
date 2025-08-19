@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        input{
+            margin-left: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h3>Regular Expression Pattern</h3>    
+    1. The first character of a string must be uppercase. <br>
+    <input id="field1" type="text" onchange="checkRegex(this, '^[A-Z]', 'status1')">
+    <span id="status1"></span><br>
+
+    2. A given value must contain a question marks, a dash and an underscore.<br>
+    <input id="field2" type="text" onchange="checkRegex(this, '^(?=.*\?)(?=.*-)(?=.*_).+$', 'status2')">
+    <span id="status2"></span><br>
+
+    3. The value must start from A or a and must end with full stop (.) or exclamation (!). <br>
+    <input id="field3" type="text" onchange="checkRegex(this, '^[aA].*[.!]$', 'status3')">
+    <span id="status3"></span><br>
+
+    4. The value must contain only one blank space. <br>
+    <input id="field4" type="text" onchange="checkRegex(this, '^\\S+\\s\\S+$', 'status4')">
+    <span id="status4"></span><br>
+
+    5. The string must not contain any digits. <br>
+    <input id="field5" type="text" onchange="checkRegex(this, '^[^0-9]*$', 'status5')">
+    <span id="status5"></span><br>
+
+    6. The string must conation at least a symbol from the group of symbol ( , , @, $, _, %,
+    !, &, *, ^, ~, -, +, (, ), {,}, [, ], . , : )<br>
+    <!-- Escape character: in RegExp() constructor  double backlash \\ whereas in string literal single \  -->
+    <input id="field6" type="text" onchange="checkRegex(this, '^.*[,@$_%!&*^~\\\-T(){}[\\].:].*$', 'status6')">
+    <span id="status6"></span><br>
+
+    7. The value must not contain any special character and digits. <br>
+    <input id="field7" type="text" onchange="checkRegex(this, '^[a-zA-Z\\s]+$', 'status7')">
+    <span id="status7"></span><br>
+
+    8. The value must contain @ symbol between two words each of at least one character. <br>
+    <input id="field8" type="text" onchange="checkRegex(this, '^\\w+@\\w+$', 'status8')">
+    <span id="status8"></span><br>
+
+    9. The string must not start with digit. <br>
+    <input id="field9" type="text" onchange="checkRegex(this, '^\\D.*$', 'status9')"> 
+    <span id="status9"></span><br>
+
+    10. The string must start with underscore character or alphabets. <br>
+    <input id="field10" type="text" onchange="checkRegex(this, '^[_a-zA-Z].*$', 'status10')">
+    <span id="status10"></span><br>
+
+    11. The value must start with 'BCA-TU-' and after these character there must be only 
+    digits.<br>
+    <input id="field11" type="text" onchange="checkRegex(this, '^(BCA-TU-)[0-9]*$', 'status11')">
+    <span id="status11"></span><br>
+
+    12. The value must be in email address format.  <br>
+    <input id="field12" type="text" onchange="checkRegex(this, '^[a-zA-Z0-9._%+-]+@[a-zA-Z]+(\.[a-zA-Z]{2,})+$', 'status12')">
+    <span id="status12"></span><br>
+    
+    13. The value must contain at least a vowel letter. <br> 
+    <input id="field13" type="text" onchange="checkRegex(this, '.*[aeiouAEIOU].*', 'status13')">
+    <span id="status13"></span><br>
+
+    14. The value contain ten digits and first digit cannot be 0.  <br>
+    <input id="field14" type="text" onchange="checkRegex(this, '^[1-9][0-9]{9}$', 'status14')">
+    <span id="status14"></span><br>
+
+    15. The value should be email address and its must end with 'edu.np'. <br>
+    <input id="field15" type="text" onchange="checkRegex(this, '^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+(\.edu.np)$', 'status15')"">
+    <span id="status15"></span><br>
+
+    16. The value should be email address and it must contain 'gmail' or 'yahoo' after @ 
+    symbol.   <br>
+    <input id="field16" type="text" onchange="checkRegex(this, '^[a-zA-Z0-9._%+-]+@(gmail|yahoo)(\.[a-zA-Z]{2,})+$', 'status16')">
+    <span id="status16"></span><br>
+
+    17. The regex must match if the string contains 'nepal' case insensitively.<br>
+    <input id="field17" type="text" onchange="checkRegex(this, '([Nn][Ee][Pp][Aa][Ll])', 'status17')">
+    <span id="status17"></span><br>
+    <!-- can be used
+      console.log('nepal'.match(/nePaL/i))
+      also if defined using string literal with flags or 
+      new RegExp(pattern,flag) -->
+
+
+
+    <script>
+        function checkRegex(inputElement, pattern, statusElementId){
+            const regex= new RegExp(pattern)       
+            const effectText= document.getElementById(statusElementId)
+            
+            if (!regex.test(inputElement.value)){            
+                inputElement.style.outline = '2px solid red';
+                effectText.textContent = '⚠️ Warning!!!';
+                effectText.style.color = 'red';   
+            }else{
+                inputElement.removeAttribute('style')                  
+                effectText.textContent= '✅ Good'
+                effectText.removeAttribute('style')         
+            }         
+        }
+    </script>
+
+</body>
+</html>
