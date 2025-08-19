@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM Selection</title>
+</head>
+<body>
+    <style>
+
+    </style>
+</body>
+    <h2 id="main-title">Welcome to DOM Selection</h2>
+    <p name="description">This is a paragraph selected by name.</p>
+    <p name="description">Another paragraph with same name.</p>
+
+    <div class="info">This is a div with class 'info'</div>
+    <div class="info">Another div with class 'info'</div>
+
+    <ul>
+        <li>Item 1</li>
+        <li class="special-item">Item 2</li>
+        <li>Item 3</li>
+    </ul>
+
+    <button onclick="selectElements()">Select Elements</button>
+
+    <script>
+        function selectElements() {
+            // 1. selecting by ID
+            const byId = document.getElementById('main-title');
+            console.log('By ID:', byId.innerText);
+            
+            // 2. Selecting by name
+            const byName = document.getElementsByName('description');
+            byName.forEach((el, i) => console.log(`By Name [${i}]: `, el.innerText))
+
+            // 3. Selecting by tag type
+            const byTag = document.getElementsByTagName('li');
+            for (let i=0; i < byTag.length; i++){
+                console.log(`By Tag [li ${i}]: `, byTag[i].innerText)
+            }
+
+            // 4. Selecting by CSS class
+            const byClass = document.getElementsByClassName('info');
+            Array.from(byClass).forEach((el, i) => console.log(`By class [info ${i}]: `, el.innerText))
+
+            // 5. Selecting by querySelector (returns first match only)
+            const querySingle = document.querySelector('.special-item');
+            console.log('By querySelector (.special-item): ', querySingle.innerText)            
+
+            // 6. Selecting by querySelectorAll (returns NodeList of all matches)
+            const queryAll = document.querySelectorAll('p[name="description"]');
+            queryAll.forEach((el, i) => console.log(`By querySelectorAll [p[name="description"] ${i}]: `, el.innerText))
+        }
+    </script>
+
+
+</html>

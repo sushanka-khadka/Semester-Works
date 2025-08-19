@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DOM Node Operations</title>
+  <style>
+    #output {
+      border: 1px solid #ccc;
+      padding: 10px;
+      margin-top: 10px;
+      background-color: #f5f5f5;
+    }
+    button {
+      margin-right: 10px;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h2>DOM Node Manipulation</h2>
+  <div id="output">
+    <p id="p1">Paragraph 1</p>
+    <p id="p2">Paragraph 2</p>
+  </div>
+
+  <button onclick="createNode()">Create Node</button>
+  <button onclick="appendNode()">Append Node</button>
+  <button onclick="insertBeforeNode()">Insert Before</button>
+  <button onclick="replaceNode()">Replace Node</button>
+  <button onclick="removeNode()">Remove Node</button>
+
+  <script>
+    let newNode= null
+
+    function createNode(){
+      newNode= document.createElement('p'); // node creation
+      newNode.textContent= '🚀 New Paragraph (Created)'
+      alert('Node created! Now you can insert it.')
+    }
+
+    function appendNode(){
+      if(newNode){
+        document.getElementById('output').appendChild(newNode)
+        alert('Node appended at the end!')
+      }else{
+        alert('Please create a node first!')
+      }
+    }
+
+    function insertBeforeNode(){
+      if(newNode){
+        const refNode= document.getElementById('p2')
+        document.getElementById('output').insertBefore(newNode, refNode) // insert before refNode
+      }else{
+        alert('Please create a node first!')
+      }
+    }
+
+    function replaceNode(){
+      const oldNode= document.getElementById('p1')
+      const replacement= document.createElement('p')
+      replacement.textContent= '🔥 Replace paragraph'
+      document.getElementById('output').replaceChild(replacement, oldNode)  // node replacement
+      alert('Paragraph 1 has been replaced!')
+    }
+
+    function removeNode(){
+      const target= document.getElementById('p2')
+      if(target){
+        document.getElementById('output').removeChild(target)
+        alert('Paragraph 2 has been removed!')
+      }else{
+        alert('Paragraph 2 already removed!')
+      }
+    }
+  </script>
+</body>
+</html>

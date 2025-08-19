@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Display Districts Dynamically</title>
+  <style>
+    ul {
+      padding: 0;
+      list-style-type: none;
+    }
+    li {
+      background-color: #f5f5f5;
+      padding: 8px;
+      margin: 5px 0;
+      border-radius: 4px;
+    }
+    #message {
+      margin-top: 20px;
+      color: green;
+    }
+  </style>
+</head>
+
+<body>
+  <h3>Districts in Nepal</h3>
+  <button onclick="displayDistricts()">Display Districts</button>
+
+  <ul id="districtList"></ul>
+  <div id="message"></div>
+
+  <script>
+    // create a js array with some districts 
+    const districts= ['Kathmandu', 'Chitwan', 'Lalitpur', 'Pokhara', 'Chitwan', 'Biratnagar', 'Dharan']
+
+    // display the districts dynamically in an unordered list using DOM Manipulation
+    function displayDistricts(){
+      const ul= document.getElementById('districtList')
+      ul.innerHTML= ''   // clear existing list items (if function is called multiple times)
+
+      // loop through the districts array and create list items dynamically
+      districts.forEach(district => {
+        const li= document.createElement('li') 
+        li.textContent= district
+        ul.appendChild(li)
+      })
+
+      // provide feedback to the use 
+      document.getElementById('message').textContent= '✅ Districts displayed successfully!'
+    }
+  </script>
+
+</body>
+</html>

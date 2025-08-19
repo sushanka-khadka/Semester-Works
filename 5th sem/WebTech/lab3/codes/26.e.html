@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Book Record</title>
+    <style>
+        body{
+            font-family: Arial, Helvetica, sans-serif;
+            margin: 20px;
+        }
+        .form-container{
+            margin-bottom: 20px;
+        }
+        .form-container button{
+            margin-left: 10px;
+        }
+        table{
+            border-collapse: collapse;
+            width: 100%;
+            max-width: 800px;
+            margin-top: 20px;
+        }
+        table, th, td{
+            border: 1px solid black;
+        }
+        th, td{
+            padding: 8px; 
+            text-align: left;           
+        }
+        tbody tr:hover{
+            background-color: green;
+            color: white;
+        }        
+    </style>
+</head>
+<body>
+    <h3>Add Book Records</h3>
+        <div class="form-container">
+            <label>Book Id:
+                <input type="text" id="bookId" value="100" readonly>
+            </label>
+            <label>Title:
+                <input type="text" id="title">
+            </label>
+
+            <label>Author(s): 
+                <input type="text" id="authors">
+            </label>
+
+            <label>Price:
+                <input type="number" step="0.1" id="price">
+            </label>
+            <button onclick="incrementBookId()">+</button>
+        </div>
+        <button onclick="saveBook()">Save</button>
+
+        <table id="bookTable">
+            <thead>
+                <tr>
+                    <th>Book Id</th>
+                    <th>Title</th>
+                    <th>Author(s)</th>
+                    <th>Price</th>
+                </tr>
+            </thead>
+            <tbody id="bookTableBody"></tbody>
+        </table>
+
+        <script>
+            let bookId = 100;
+
+            function incrementBookId(){
+                bookId ++
+                document.getElementById('bookId').value = bookId
+
+                // add a new empty row to the table
+                const tableBody= document.getElementById('bookTableBody')
+                const newRow = tableBody.insertRow()
+                newRow.insertCell(0).innerText= bookId
+                newRow.insertCell(1).innerText= ''
+                newRow.insertCell(2).innerText= ''
+                newRow.insertCell(3).innerText= ''
+
+                // add click event to the new row
+                newRow.addEventListener('click', function (){
+                    populateForm(newRow)
+                })
+            }
+
+            function saveBook(){
+                const title= document.getElementById('title').value
+                const authors= document.getElementById('authors').value
+                const price= document.getElementById('price').value
+
+                if(title && authors && price){
+                    const tableBody= document.getElementById('bookTableBody')
+                    const rows= tableBody.getElementsByTagName('tr')
+
+                    // update the row with the entered values
+                    for(let i=0; i<rows.length; i++){
+                        if(rows[i].cells[0].innerText == bookId){
+                            rows[i].cells[1].innerText = title
+                            rows[i].cells[2].innerText = authors
+                            rows[i].cells[3].innerText = price
+                            break
+                        }
+                    }
+
+                    // clear the input fields (except Book Id)
+                    document.getElementById('title').value= ''
+                    document.getElementById('authors').value= ''
+                    document.getElementById('price').value= ''
+                }else{
+                    alert('Please fill in all fields before saving.')
+                }
+            }
+
+            function populateForm(row){
+                // populate the form fields with the row data
+                document.getElementById('bookId').value = row.cells[0].innerText
+                document.getElementById('title').value = row.cells[1].innerText
+                document.getElementById('authors').value = row.cells[2].innerText
+                document.getElementById('price').value = row.cells[3].innerText
+
+                // update the global bookId variable
+                bookId= parseInt(row.cells[0].innerText, 10) // radix 10 decimal
+            }
+
+            // add click event to existing rows (if any)
+            document.addEventListener('DOMContentLoaded', function (){
+                const rows= document.getElementById('bookTableBody').getElementsByTagName('tr')
+                for(let i=0; i< rows.length; i++){
+                    rows[i].addEventListener('click', function (){
+                        populateForm(rows[i])
+                    })
+                }
+            } )
+
+        </script>
+</body>
+</html>

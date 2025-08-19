@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DOM Attribute Methods</title>
+  <style>
+    img{
+      border: 2px solid #ccc;
+      margin-bottom: 10px;
+    }
+    #message{
+      margin-top: 10px;
+      color: green;
+    }
+  </style>
+</head>
+<body>
+  <h2>DOM Attribute Methods</h2>
+  <img id="image" src="https://www.copahost.com/blog/wp-content/uploads/2019/07/imgsize2-768x466.png" alt="Placeholder Image" height="250px" width="400px">
+  <br>
+
+  <button onclick="checkAttribute()">Check 'alt' Attribute</button>
+  <button onclick="getAttributeValue()">Get 'src' Attribute</button>
+  <button onclick="setNewAttribute()">Set New 'title' Attribute</button>
+  <button onclick="removeAltAttribute()">Remove 'alt' Attribute</button>
+
+  <div id="message"></div>
+
+  <script>
+    const img= document.getElementById('image')
+    const message= document.getElementById('message')
+
+    function checkAttribute(){
+      if(img.hasAttribute('alt')){
+        message.textContent= '✅ The image has an "alt" attribute.'
+      }else {
+        message.textContent= '❌ The image has no "alt" attribute.'
+      }
+    }
+
+    function getAttributeValue(){
+      const srcValue= img.getAttribute('src')
+      message.textContent= `🔍 Image source is: ${srcValue}`
+    }
+
+    function setNewAttribute(){
+      img.setAttribute('title', 'This is a placeholder image.')
+      message.textContent= '🎯 "title" attribute set successfully.'
+    }
+
+    function removeAltAttribute(){
+      img.removeAttribute('alt')
+      message.textContent= '⛔ "alt" attribute removed!'
+    }
+  </script>
+  
+</body>
+</html>

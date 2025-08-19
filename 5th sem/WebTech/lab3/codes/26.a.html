@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM Node Properties</title>
+    <style>
+        #output {
+            margin-top: 20px;
+            font-family: monospace;
+            white-space: pre-wrap;
+            color: darkblue;
+        }
+    </style>
+</head>
+<body>
+    <h2>DOM Node Properties</h2>
+
+    <div id="container">
+        <p>This is the <strong>first</strong> paragraph.</p>
+        <p>This is the <em>second</em> paragraph.</p>
+    </div>
+
+    <button onclick="analyzeNode()">Analyze node</button>
+
+    <div id="output"></div>    
+
+    <script>
+        function analyzeNode(){
+            const output= document.getElementById('output');
+
+            const container= document.getElementById('container')
+            const firstParagraph= container.firstElementChild
+
+            let result= ""
+
+            result += `nodeName: ${firstParagraph.nodeName}\n`
+            result += `nodeValue ${firstParagraph.nodeValue}\n` // usually null for element nodes
+            result += `nodeType: ${firstParagraph.nodeType}\n`  // 1 for Element_node
+            
+            result += `parentNode.nodeName: ${firstParagraph.parentNode.nodeName}\n`
+            
+            result += `firstChild.nodeName: ${firstParagraph.firstChild.nodeName}\n`
+            result += `firstChild.nodeValue ${firstParagraph.firstChild.nodeValue}\n`
+
+            result += `lastChild.nodeName: ${firstParagraph.lastChild.nodeName}\n`
+            result += `lastChild.nodeValue: ${firstParagraph.lastChild.nodeValue}\n`
+
+            result += `previousSibling.nodeName: ${firstParagraph.previousSibling ? firstParagraph.previousSibling.nodeName : 'null'}\n`
+            result += `nextSibling.nodeValue ${firstParagraph.nextSibling ? firstParagraph.nextSibling.nodeValue : 'null'}\n`
+
+            result += `childNodes.length: ${firstParagraph.childNodes.length}\n`
+
+            output.innerHTML = result
+        }
+    </script>
+
+</body>
+</html>
