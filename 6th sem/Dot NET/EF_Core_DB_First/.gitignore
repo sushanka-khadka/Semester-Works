@@ -1,0 +1,64 @@
+﻿# ==============================
+# Visual Studio & .NET .gitignore
+# ==============================
+
+# Build results
+bin/
+obj/
+out/
+
+# Visual Studio
+.vs/
+*.user
+*.suo
+
+# NuGet packages (can be restored)
+*.nupkg
+*.snupkg
+*.nuspec
+packages/
+
+# Logs
+*.log
+
+# Temporary files
+*.tmp
+*.temp
+
+# ==============================
+# ASP.NET Core Specific
+# ==============================
+
+# User secrets
+secrets.json
+
+# Local environment settings
+appsettings.json
+appsettings.Development.json
+launchSettings.json
+
+# Publish outputs
+wwwroot/dist/
+wwwroot/libman.json
+
+# ==============================
+# Entity Framework
+# ==============================
+
+# If you want to regenerate migrations, ignore them
+# Uncomment the next line if you DON'T want migrations in Git
+# Migrations/
+
+# ==============================
+# OS generated files
+# ==============================
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+.DS_Store
+
+# ==============================
+# Rider / JetBrains IDE
+# ==============================
+.idea/
+*.iml
