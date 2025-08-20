@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>JavaScript Cookies Demo</title>
+</head>
+<body>
+    <h2>JavaScript Cookie Operations</h2>
+    <button onclick="createCookies()">Create Cookies</button>
+    <button onclick="readCookies()">Read Cookies</button>
+    <button onclick="changeCookie()">Change Cookie</button>
+    <button onclick="deleteCookie()">Delete Cookie</button>
+    
+    <pre id="output" style="background: #f0f0f0; padding: 10px;"></pre>
+
+    <script>
+        // Function to create cookies in different ways
+        function createCookies() {
+            document.cookie = "username=Sushanka Khadka; path=/"; // Simple session cookie
+            document.cookie = "role=admin; max-age=3600; path=/"; // Persistent cookie for 1 hour
+            document.cookie = "theme=dark; path=/; expires=" + new Date(Date.now() + 86400000).toUTCString(); // Cookie with expiry and path
+
+            showOutput("Cookies created!");
+        }
+
+        // Function to read cookies
+        function readCookies() {
+            const cookies = document.cookie;
+            showOutput("Current cookies:\n" + cookies);
+        }
+
+        // Function to change cookie
+        function changeCookie() {
+            document.cookie = "username=Unknown; path=/"; // Overwrites the previous value
+            showOutput("Cookie 'username' updated to Unknown.");
+        }
+
+        // Function to delete cookie
+        function deleteCookie() {
+            // To delete, set the cookie with an expired date
+            document.cookie = "username=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+            document.cookie = "role=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+            document.cookie = "theme=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+
+            showOutput("Cookies deleted.");
+        }
+
+        // Helper function to print to the page
+        function showOutput(msg) {
+            document.getElementById("output").textContent = msg;
+        }
+    </script>
+</body>
+</html>
