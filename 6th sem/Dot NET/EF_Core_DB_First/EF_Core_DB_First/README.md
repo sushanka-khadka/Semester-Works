@@ -1,3 +1,3 @@
 Model Validation Failed:
 
-![Model Validaton Failed](Issues/model%20validaton%20failed.gif)
+<img src="Issues/model%20validaton%20failed.gif" alt="model validation failed" width="800"/>
