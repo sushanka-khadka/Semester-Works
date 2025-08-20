@@ -23,6 +23,6 @@ namespace EF_Core_DB_First.Models
         public string Gender { get; set; }
 
         // navigation property 
-        public Parent Parent { get; set; }
+        public Parent? Parent { get; set; }
     }
 }
