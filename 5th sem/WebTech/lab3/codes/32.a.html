@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>    
+</head>
+<body>    
+    <h4> Serialization and Deserialization of JSON (Stringifying and Parsing)</h4>
+    <pre id="preety">show here</pre>
+    <script>
+        const student_record= {
+        "students": [
+            {
+                "name": "ram",
+                "age": 42,
+                "grade": "C",
+                "subjects": [
+                    "DAA",
+                    "WEB"
+                ],
+                "contact_detail": {
+                    "email": "ram@gmail.com",
+                    "phone": 980000000000
+                }
+            },
+            {
+                "name": "hari",
+                "age": 22,
+                "grade": "A",
+                "subjects": ["DAA","WEB"],
+                "contact_detail": {
+                    "email": "ram@gmail.com",
+                    "phone": 980000000000
+                }
+            },
+            {
+                "name": "ram",
+                "age": 42,
+                "grade": "C",
+                "subjects": ["DAA","WEB"],
+                "contact_detail": {
+                    "email": "ram@gmail.com",
+                    "phone": 980000000000
+                }
+            }
+        ]
+    }
+    // 1. Serialization: Convert JavaScript object to JSON string
+    const preetyJSON= JSON.stringify(student_record, null, 2)
+    
+    console.log(preetyJSON)    
+    document.getElementById('preety').innerText= preetyJSON
+
+    // 2. Deserialization: Convert JSON string back to JavaScript object
+    // const deserializedObject = JSON.parse(preetyJSON);
+
+    </script>
+    
+</body>
+</html>

@@ -1,0 +1,56 @@
+{
+    "students": [
+        {
+            "name": "ram",
+            "age": 42,
+            "grade": "C",
+            "subjects": [
+                "DAA",
+                "WEB"
+            ],
+            "contact_detail": {
+                "email": "ram@gmail.com",
+                "phone": 980000000000
+            }
+        },
+        {
+            "name": "hari",
+            "age": 22,
+            "grade": "A",
+            "subjects": [
+                "DAA",
+                "WEB"
+            ],
+            "contact_detail": {
+                "email": "ram@gmail.com",
+                "phone": 980000000000
+            }
+        },
+        {
+            "name": "ram",
+            "age": 42,
+            "grade": "C",
+            "subjects": [
+                "DAA",
+                "WEB"
+            ],
+            "contact_detail": {
+                "email": "ram@gmail.com",
+                "phone": 980000000000
+            }
+        },
+        {
+            "name": "ram",
+            "age": 42,
+            "grade": "C",
+            "subjects": [
+                "DAA",
+                "WEB"
+            ],
+            "contact_detail": {
+                "email": "ram@gmail.com",
+                "phone": 980000000000
+            }
+        }
+    ]
+}

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Read and Write JSON File in Browser</title>
+</head>
+<body>
+
+<h2>📥 Read JSON File</h2>
+<input type="file" id="fileInput" accept=".json">
+<pre id="jsonOutput"></pre>
+
+<h2>📤 Write JSON File</h2>
+<button id="downloadBtn">Download Modified JSON</button>
+
+<script>
+  let jsonData = {};
+
+  // Read JSON file
+  document.getElementById('fileInput').addEventListener('change', function(event) {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+
+      reader.onload = function(e) {
+        try {
+          jsonData = JSON.parse(e.target.result);
+          document.getElementById('jsonOutput').textContent = JSON.stringify(jsonData, null, 2);
+        } catch (error) {
+          alert('Invalid JSON file!');
+        }
+      };
+
+      reader.readAsText(file);
+    }
+  });
+
+  // Write (download) JSON file
+  document.getElementById('downloadBtn').addEventListener('click', function() {
+    // Modify the JSON before savg
+    jsonData.updatedAt = new Date().toISOString();
+    jsonData.note = "This file was modified and saved from the browser";
+
+    const blob = new Blob([JSON.stringify(jsonData, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'updated_data.json';
+    a.click();
+
+    URL.revokeObjectURL(url);
+  });
+</script>
+
+</body>
+</html>
