@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jQuery Event</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        body{
+            text-align: center;
+        }
+        #box {
+            width: 200px;
+            height: 200px;
+            background-color: lightgreen;
+            /* text-align: center; */
+            line-height: 200px;
+            margin: 20px auto;
+            font-size: 18px;
+            cursor: pointer;
+        }
+        #output {
+            margin-top: 10px;
+            /* text-align: center; */
+            font-weight: bold;
+        }
+        form{
+            /* text-align: center; */
+            margin-top: 30px;
+        }
+        
+    </style>
+</head>
+<body>
+    <h3>jQuery Event Handling</h3>
+    <div id="box">Hover or click me</div>
+    <div id="output"></div>
+
+    <form id="myForm">
+        <label>Enter your Name: 
+            <input type="text" id="name">
+            <button type="submit">Submit</button>
+        </label>
+    </form>
+
+    <script>
+        $(function() {
+            //click event
+            $('#box').click(function () {
+                $('#output').text('Box Clicked!')
+            })
+
+            // double click event
+            $('#box').dblclick(function () {
+                $('#output').text('Box Double Clicked!')
+            })
+
+            // mouse hover event
+            $('#box').mouseenter(function () {
+                $(this).css('background-color', 'silver')
+                $('#output').text('Mouse entered the box.')
+            })
+
+            // mouse leave event
+            $('#box').mouseleave(() =>{
+                $('#output').text('Mouse leave the box.')
+            })
+
+            // Key dowm event
+            $('#name').keydown((e) => {
+                $('#output').text('Your pressed: ' + e.key)
+            })
+
+            // Form submit event
+            $('#myForm').submit(function (e) {
+                e.preventDefault()
+                let name= $('#name').val()
+                $('#output').text('Form Submitted! Hello, ' + name)
+            })
+        })
+
+    </script>
+    
+</body>
+</html>

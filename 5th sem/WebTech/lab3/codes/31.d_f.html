@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jQuery DOM Manipulation</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        div{            
+            margin: 20px auto;            
+            width: 400px;
+            padding: 10px;
+        }
+        #content{
+            border: 1px solid #333;
+            border-radius: 8px;
+            background-color: #f2f3f4;
+        }                
+        button{
+            margin: 5px;
+        }
+
+    </style>
+</head>
+<body>
+    <h2 style="text-align: center;">jQuery DOM Manipulation</h2>
+    <div id="content">
+        <p id="para">This is a paragraph.</p>
+        <img id="image" src="https://www.copahost.com/blog/wp-content/uploads/2019/07/imgsize2-768x466.png" alt="Placeholder Image" height="250px" width="400px">
+    </div>
+
+    <div>
+        <button id="changeText">Change Text</button>
+        <button id="changeHTML">Change HTML</button>        
+        <button id="addElement">Add Element</button>
+        <button id="removeElement">Remove Element</button>
+        <button id="showImage">Show Image</button>
+        <button id="hideImage">Hide Image</button>
+        <button id="toggleImage">Toggle Image</button>
+        <button id="changeStyle">Change Style</button>
+        <button id="slideToggle">Slide Toggle</button>
+        <button id="fadeToggle">Fade Toggle</button>
+    </div>
+    
+    <script>
+        $(document).ready(function() {
+            // change text of a paragraph
+            $('#changeText').click(() =>{
+                $('#para').text('Text chaged using jQuery')
+            })
+
+            // change HTML Content
+            $('#changeHTML').click(() =>{
+                $('#para').html('<strong>This is now bold HTML content!</strong>')
+            })
+
+            // add new element
+            $('#addElement').click(() =>{
+                $('#content').append('<p class="newPara">New paragraph added!</p>')
+            })
+
+            // remove paragraph
+            $('#removeElement').click(() =>{
+                $('.newPara').last().remove()
+            })
+
+            // show image visibility
+            $('#showImage').click(() =>{
+                $('#image').show()
+            })
+
+            // hide image visibility
+            $('#hideImage').click(() =>{
+                $('#image').hide()
+            })            
+
+            // toggle image visibility
+            $('#toggleImage').click(() =>{
+                $('#image').toggle()
+            })
+
+            // slide toggle
+            $('#slideToggle').click(() =>{
+                $('#image').slideToggle()
+            })
+
+            // fade toggle
+            $('#fadeToggle').click(() =>{
+                $('#image').fadeToggle()
+            })
+
+
+            // change style
+            $('#changeStyle').click(() =>{
+                $('#content').css({
+                    "background-color": "#dff0d8",
+                    "color": "#3c763d",
+                    "border": "2px dashed #3c763d"
+                })
+            })
+        
+        })
+    </script>
+</body>
+</html>

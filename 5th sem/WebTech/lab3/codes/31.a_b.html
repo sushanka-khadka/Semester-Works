@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jQuery demo</title>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+    <style>
+        body { font-family: Arial; padding: 20px; }
+        label { display: block; margin-top: 10px; }
+        .error { color: red; font-size: 0.9em; }
+        input, select { margin-top: 5px; }
+        
+    </style>
+</head>
+<body>
+    <h2>Signup Form</h2>
+    <form id="signupForm">
+        <label>Name:
+            <input type="text" id="name">
+            <span class="error" id="nameError"></span>
+        </label>
+
+        <label>Email:
+            <input type="text" id="email">
+            <span class="error" id="emailError"></span>
+        </label>
+
+        <label>Password:
+            <input type="password" id="password">
+            <button type="button" id="togglePassword">Show</button>
+            <span class="error" id="passwordError"></span>
+        </label>
+
+        <label>Gender:
+            <input name="gender" type="radio"> Male
+            <input name="gender" type="radio"> Female
+            <span class="error" id="genderError"></span>
+        </label>
+
+        <label>Interests: 
+            <input name="interests" type="checkbox" value="sports"> Sports
+            <input name="interests" type="checkbox" value="study"> Study
+            <input name="interests" type="checkbox" value="music"> Music
+            <span class="error" id="interestError"></span>
+        </label>
+
+        <label>Country: 
+            <select id="country">
+                <option value="">---select---</option>
+                <option value="Nepal">Nepal</option>
+                <option value="Others">Others</option>
+            </select>
+            <span class="error" id="countryError"></span>
+        </label><br>
+
+        <button type="submit">Submit</button>        
+    </form>    
+    
+    
+    <script>                
+        // prevents jQuery from loading before document elements 
+        // // $(function(){        shortcut to $(document.ready(function(){}))        
+        
+        $(document).ready(function(){            
+            // toggle passowrd button
+            $('#togglePassword').click(function() {
+                    const passwordField= $('#password');
+                    const type= passwordField.attr('type') === 'password' ?'text' : 'password';
+                    passwordField.attr('type', type);
+
+                    // change this text based on the current state
+                    $(this).text(type === 'password' ? 'Show' : 'Hide');
+                })
+            
+            $('#signupForm').submit(function(event){
+                event.preventDefault();  // prevent form form                                            
+
+                let valid =true; 
+
+                // clear previous errors
+                $('.error').text('');
+
+                //Name
+                if($('#name').val().trim() === ''){
+                    $('#nameError').text('Name is required')
+                    valid= false;
+                }
+
+                //Email
+                const email= $('#email').val().trim();
+                const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if(email === ''){
+                    $('#emailError').text('Email is required');
+                    valid= false;
+                }else if (!emailPattern.test(email)) {
+                    $('#emailError').text('Enter a valid Email');
+                    valid= false;
+                }
+
+                //Password
+                if ($('#password').val().length < 6){
+                    $('#passwordError').text('Password must be at least 6 characters');
+                    valid= false;
+                }                
+                
+                //Gender 
+                if(!$("input[name='gender']:checked").val()){
+                    $('#genderError').text('Please select gender');
+                    valid= false;
+                }
+
+                // Intereset
+                if($("input[name='interests']:checked").length === 0){
+                    $('#interestError').text('Please select at least one interest');
+                    valid= false;
+                }
+                
+                // country
+                if ($('#country').val() == ''){
+                    $('#countryError').text('Please select a country!')
+                    valid= false;
+                }
+
+                if(valid){
+                    alert('Email submitted successfully');
+                    $('#signupForm')[0].reset();
+                }
+            });
+        });
+    </script>    
+</body>
+</html>
