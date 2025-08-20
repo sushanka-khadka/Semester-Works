@@ -1,4 +1,4 @@
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using EF_Core_DB_First.Models;
 using Microsoft.AspNetCore.Mvc;
 
