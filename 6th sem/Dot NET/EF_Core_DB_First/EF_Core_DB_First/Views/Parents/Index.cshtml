@@ -34,7 +34,7 @@
                 @Html.DisplayFor(modelItem => item.HasChildren)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Employee.Address)
+                @Html.DisplayFor(modelItem => item.Employee.FullName)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |

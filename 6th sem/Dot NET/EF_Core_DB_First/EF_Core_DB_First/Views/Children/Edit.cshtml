@@ -24,6 +24,24 @@
                 <span asp-validation-for="Gender" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="Parents" class="control-label"></label>
+                <select asp-for="Parents" class="form-control" multiple="multiple">
+                    @foreach (var parent in (MultiSelectList)ViewBag.ParentsList)
+                    {
+                        if (parent.Selected)
+                        {
+                            <option value="@parent.Value" selected>@parent.Text</option>
+                        }
+                        else
+                        {
+                            <option value="@parent.Value">@parent.Text</option>
+                        }
+                    }
+                </select>
+                <span asp-validation-for="Parents" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>
         </form>
