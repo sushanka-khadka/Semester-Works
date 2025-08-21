@@ -22,8 +22,15 @@ namespace EF_Core_DB_First.Controllers
         // GET: Parents
         public async Task<IActionResult> Index()
         {
-            var eF_Core_DbContext = _context.Parents.Include(p => p.Employee);
-            return View(await eF_Core_DbContext.ToListAsync());
+            var eF_Core_DbContext = _context.Parents.Include(p => p.Employee).ToListAsync();  // will return Entity Model (vulerable to sensitive data)
+            //var eF_Core_DbContext = _context.Parents.Select(p => new ParentViewModel
+            //{
+            //    Id = p.Id,
+            //    Name = p.Name,
+            //    HasChildren = p.HasChildren,
+            //    EmpId = p.EmpId,
+            //}).ToListAsync();
+            return View(await eF_Core_DbContext);
         }
 
         // GET: Parents/Details/5
@@ -34,9 +41,7 @@ namespace EF_Core_DB_First.Controllers
                 return NotFound();
             }
 
-            var parent = await _context.Parents
-                .Include(p => p.Employee)
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var parent = await _context.Parents.Include(p => p.Employee).FirstOrDefaultAsync(m => m.Id == id);
             if (parent == null)
             {
                 return NotFound();
@@ -48,7 +53,8 @@ namespace EF_Core_DB_First.Controllers
         // GET: Parents/Create
         public IActionResult Create()
         {
-            ViewData["EmpId"] = new SelectList(_context.Employees, "EmpId", "Address");
+            //ViewData["EmpId"] = new SelectList(_context.Employees, "EmpId", "Address");
+            ViewData["EmpId"] = new SelectList(_context.Employees, "EmpId", "EmpId");
             return View();
         }
 
@@ -65,7 +71,8 @@ namespace EF_Core_DB_First.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["EmpId"] = new SelectList(_context.Employees, "EmpId", "Address", parent.EmpId);
+            //ViewData["EmpId"] = new SelectList(_context.Employees, "EmpId", "Address", parent.EmpId);
+            ViewData["EmpId"] = new SelectList(_context.Employees, "EmpId", "EmpId", parent.EmpId);
             return View(parent);
         }
 
@@ -82,7 +89,8 @@ namespace EF_Core_DB_First.Controllers
             {
                 return NotFound();
             }
-            ViewData["EmpId"] = new SelectList(_context.Employees, "EmpId", "Address", parent.EmpId);
+            //ViewData["EmpId"] = new SelectList(_context.Employees, "EmpId", "Address", parent.EmpId);
+            ViewData["EmpId"] = new SelectList(_context.Employees, "EmpId", "EmpId", parent.EmpId);
             return View(parent);
         }
 
@@ -118,7 +126,8 @@ namespace EF_Core_DB_First.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["EmpId"] = new SelectList(_context.Employees, "EmpId", "Address", parent.EmpId);
+            //ViewData["EmpId"] = new SelectList(_context.Employees, "EmpId", "Address", parent.EmpId);
+            ViewData["EmpId"] = new SelectList(_context.Employees, "EmpId", "EmpId", parent.EmpId);
             return View(parent);
         }
 
