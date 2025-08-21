@@ -18,6 +18,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.Gender)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Parents)
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -29,6 +32,16 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Gender)
+            </td>
+            <td>
+                <ul>
+                @foreach(var parent in item.Parents)
+                {
+                <li>
+                    @Html.DisplayFor(modelItem => parent.Name)
+                </li>
+                }
+                </ul>
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
