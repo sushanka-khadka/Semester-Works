@@ -5,7 +5,7 @@ namespace EF_Core_DB_First.Models
     public class Child
     {
         [Key]
-        public int Id { get; set; }
+        public int ChildId { get; set; }
         [Required]
         [StringLength(50)]
         public string Name { get; set; }

@@ -6,7 +6,7 @@ namespace EF_Core_DB_First.ViewModels
     public class ParentViewModel
     {
         [Key]
-        public int Id { get; set; }
+        public int ParentId { get; set; }
         [Required]
         [StringLength(50)]
         public string Name { get; set; }

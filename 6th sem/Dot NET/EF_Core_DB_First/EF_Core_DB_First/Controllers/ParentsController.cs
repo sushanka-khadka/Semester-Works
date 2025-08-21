@@ -1,12 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using EF_Core_DB_First.Data;
+using EF_Core_DB_First.Models;
+using EF_Core_DB_First.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using EF_Core_DB_First.Data;
-using EF_Core_DB_First.Models;
+using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages.Manage;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace EF_Core_DB_First.Controllers
 {
@@ -25,7 +27,7 @@ namespace EF_Core_DB_First.Controllers
             var eF_Core_DbContext = _context.Parents.Include(p => p.Employee).ToListAsync();  // will return Entity Model (vulerable to sensitive data)
             //var eF_Core_DbContext = _context.Parents.Select(p => new ParentViewModel
             //{
-            //    Id = p.Id,
+            //    ParentId = p.ParentId,
             //    Name = p.Name,
             //    HasChildren = p.HasChildren,
             //    EmpId = p.EmpId,
@@ -41,7 +43,7 @@ namespace EF_Core_DB_First.Controllers
                 return NotFound();
             }
 
-            var parent = await _context.Parents.Include(p => p.Employee).FirstOrDefaultAsync(m => m.Id == id);
+            var parent = await _context.Parents.Include(p => p.Employee).FirstOrDefaultAsync(m => m.ParentId == id);
             if (parent == null)
             {
                 return NotFound();
@@ -63,17 +65,22 @@ namespace EF_Core_DB_First.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,HasChildren,EmpId")] Parent parent)
+        public async Task<IActionResult> Create([Bind("ParentId,Name,HasChildren,EmpId")] ParentViewModel parentVM)
         {
             if (ModelState.IsValid)
             {
+                var parent = new Parent
+                {
+                    ParentId = parentVM.ParentId,
+                    Name = parentVM.Name,
+                    HasChildren = parentVM.HasChildren,
+                    EmpId = parentVM.EmpId,
+                };
                 _context.Add(parent);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            //ViewData["EmpId"] = new SelectList(_context.Employees, "EmpId", "Address", parent.EmpId);
-            ViewData["EmpId"] = new SelectList(_context.Employees, "EmpId", "EmpId", parent.EmpId);
-            return View(parent);
+            return View();
         }
 
         // GET: Parents/Edit/5
@@ -84,7 +91,14 @@ namespace EF_Core_DB_First.Controllers
                 return NotFound();
             }
 
-            var parent = await _context.Parents.FindAsync(id);
+            var parent = await _context.Parents.Select(p => new ParentViewModel
+            {
+                ParentId = p.ParentId,
+                Name = p.Name,
+                HasChildren = p.HasChildren,
+                EmpId = p.EmpId,
+            }).SingleOrDefaultAsync(p => p.ParentId == id);
+                
             if (parent == null)
             {
                 return NotFound();
@@ -99,15 +113,22 @@ namespace EF_Core_DB_First.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,HasChildren,EmpId")] Parent parent)
+        public async Task<IActionResult> Edit(int id, [Bind("ParentId,Name,HasChildren,EmpId")] ParentViewModel parentVM)
         {
-            if (id != parent.Id)
+            if (id != parentVM.ParentId)
             {
                 return NotFound();
             }
 
             if (ModelState.IsValid)
             {
+                var parent = new Parent
+                {
+                    ParentId = parentVM.ParentId,
+                    Name = parentVM.Name,
+                    HasChildren = parentVM.HasChildren,
+                    EmpId = parentVM.EmpId,
+                };
                 try
                 {
                     _context.Update(parent);
@@ -115,7 +136,7 @@ namespace EF_Core_DB_First.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ParentExists(parent.Id))
+                    if (!ParentExists(parent.ParentId))
                     {
                         return NotFound();
                     }
@@ -127,8 +148,8 @@ namespace EF_Core_DB_First.Controllers
                 return RedirectToAction(nameof(Index));
             }
             //ViewData["EmpId"] = new SelectList(_context.Employees, "EmpId", "Address", parent.EmpId);
-            ViewData["EmpId"] = new SelectList(_context.Employees, "EmpId", "EmpId", parent.EmpId);
-            return View(parent);
+            //ViewData["EmpId"] = new SelectList(_context.Employees, "EmpId", "EmpId", parent.EmpId);
+            return View();
         }
 
         // GET: Parents/Delete/5
@@ -141,13 +162,23 @@ namespace EF_Core_DB_First.Controllers
 
             var parent = await _context.Parents
                 .Include(p => p.Employee)
-                .FirstOrDefaultAsync(m => m.Id == id);
+                .FirstOrDefaultAsync(m => m.ParentId == id);
+
+            var parentVM = await _context.Parents.Select(p => new ParentViewModel
+            {
+                ParentId = p.ParentId,
+                Name = p.Name,
+                HasChildren = p.HasChildren,
+                EmpId = p.EmpId,
+            }).SingleOrDefaultAsync(p => p.ParentId == id);
+
+
             if (parent == null)
             {
                 return NotFound();
             }
-
-            return View(parent);
+            ViewData["Employee"] = parent.Name;
+            return View(parentVM);
         }
 
         // POST: Parents/Delete/5
@@ -167,7 +198,7 @@ namespace EF_Core_DB_First.Controllers
 
         private bool ParentExists(int id)
         {
-            return _context.Parents.Any(e => e.Id == id);
+            return _context.Parents.Any(e => e.ParentId == id);
         }
     }
 }

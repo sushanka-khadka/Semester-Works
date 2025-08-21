@@ -35,7 +35,7 @@ namespace EF_Core_DB_First.Controllers
             }
 
             var child = await _context.Children.Include(c => c.Parents)
-                .FirstOrDefaultAsync(m => m.Id == id);
+                .FirstOrDefaultAsync(m => m.ChildId == id);
             if (child == null)
             {
                 return NotFound();
@@ -47,7 +47,7 @@ namespace EF_Core_DB_First.Controllers
         // GET: Children/Create
         public IActionResult Create()
         {
-            ViewData["ParentId"] = new SelectList(_context.Parents, "Id", "Name");
+            ViewData["ParentChildId"] = new SelectList(_context.Parents, "ChildId", "Name");
             return View();
         }
 
@@ -56,7 +56,7 @@ namespace EF_Core_DB_First.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Gender")] Child child)
+        public async Task<IActionResult> Create([Bind("ChildId,Name,Gender")] Child child)
         {
             if (ModelState.IsValid)
             {
@@ -74,13 +74,13 @@ namespace EF_Core_DB_First.Controllers
             {
                 return NotFound();
             }
-            var child = await _context.Children.Include(c => c.Parents).SingleOrDefaultAsync(c => c.Id == id);
+            var child = await _context.Children.Include(c => c.Parents).SingleOrDefaultAsync(c => c.ChildId == id);
             if (child == null)
             {
                 return NotFound();
             }
-            //ViewData["ParentId"] = new SelectList(_context.Parents, "Id", "Name", child.Parents);   // selectlist won't work for multiple selected values
-            ViewData["ParentsList"] = new MultiSelectList(_context.Parents.ToList(), "Id", "Name", child.Parents.Select(p => p.Id).ToList());
+            //ViewData["ParentChildId"] = new SelectList(_context.Parents, "ChildId", "Name", child.Parents);   // selectlist won't work for multiple selected values
+            ViewData["ParentsList"] = new MultiSelectList(_context.Parents.ToList(), "ChildId", "Name", child.Parents.Select(p => p.ParentId).ToList());
             return View(child);
         }
 
@@ -89,9 +89,9 @@ namespace EF_Core_DB_First.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Gender")] Child child)
+        public async Task<IActionResult> Edit(int id, [Bind("ChildId,Name,Gender")] Child child)
         {
-            if (id != child.Id)
+            if (id != child.ChildId)
             {
                 return NotFound();
             }
@@ -105,7 +105,7 @@ namespace EF_Core_DB_First.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ChildExists(child.Id))
+                    if (!ChildExists(child.ChildId))
                     {
                         return NotFound();
                     }
@@ -128,7 +128,7 @@ namespace EF_Core_DB_First.Controllers
             }
 
             var child = await _context.Children.Include(c => c.Parents)
-                .FirstOrDefaultAsync(m => m.Id == id);
+                .FirstOrDefaultAsync(m => m.ChildId == id);
             if (child == null)
             {
                 return NotFound();
@@ -154,7 +154,7 @@ namespace EF_Core_DB_First.Controllers
 
         private bool ChildExists(int id)
         {
-            return _context.Children.Any(e => e.Id == id);
+            return _context.Children.Any(e => e.ChildId == id);
         }
     }
 }
