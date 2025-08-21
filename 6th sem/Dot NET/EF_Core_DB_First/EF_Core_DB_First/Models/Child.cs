@@ -13,7 +13,7 @@ namespace EF_Core_DB_First.Models
         public string Gender { get; set; }
 
         // no foregin key in main table as it is stored in join table
-        // navigation to parent
+        // many to many navigation property (handled by EF Core join table)
         public ICollection<Parent> Parents { get; set; }
     }
 }

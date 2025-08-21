@@ -22,7 +22,8 @@ namespace EF_Core_DB_First.Controllers
         // GET: Children
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Children.ToListAsync());
+            var child = _context.Children.Include(c => c.Parents).ToListAsync();
+            return View(await child);
         }
 
         // GET: Children/Details/5
@@ -33,7 +34,7 @@ namespace EF_Core_DB_First.Controllers
                 return NotFound();
             }
 
-            var child = await _context.Children
+            var child = await _context.Children.Include(c => c.Parents)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (child == null)
             {
@@ -46,6 +47,7 @@ namespace EF_Core_DB_First.Controllers
         // GET: Children/Create
         public IActionResult Create()
         {
+            ViewData["ParentId"] = new SelectList(_context.Parents, "Id", "Name");
             return View();
         }
 
@@ -72,12 +74,13 @@ namespace EF_Core_DB_First.Controllers
             {
                 return NotFound();
             }
-
-            var child = await _context.Children.FindAsync(id);
+            var child = await _context.Children.Include(c => c.Parents).SingleOrDefaultAsync(c => c.Id == id);
             if (child == null)
             {
                 return NotFound();
             }
+            //ViewData["ParentId"] = new SelectList(_context.Parents, "Id", "Name", child.Parents);   // selectlist won't work for multiple selected values
+            ViewData["ParentsList"] = new MultiSelectList(_context.Parents.ToList(), "Id", "Name", child.Parents.Select(p => p.Id).ToList());
             return View(child);
         }
 
@@ -124,7 +127,7 @@ namespace EF_Core_DB_First.Controllers
                 return NotFound();
             }
 
-            var child = await _context.Children
+            var child = await _context.Children.Include(c => c.Parents)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (child == null)
             {
