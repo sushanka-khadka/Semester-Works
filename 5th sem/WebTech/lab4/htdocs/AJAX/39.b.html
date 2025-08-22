@@ -1,0 +1,26 @@
+<!-- AJAX with PHp for GET request -->
+<!DOCTYPE html>
+<html lang="en">
+<head>    
+    <title>AJAX GET Request</title>
+    <script>
+        function sendData() {
+            let name= document.getElementById("name").value;
+            let xhr = new XMLHttpRequest();
+            xhr.open("GET", '39.b.php?name=' + encodeURIComponent(name), true);
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    document.getElementById('response').innerHTML = xhr.responseText;
+                } 
+            };
+            xhr.send();
+        }
+    </script>
+</head>
+<body>
+    <h3>AJAX GET Request with PHP</h3>   
+    <input type="text" id="name" placeholder="Enter your name">
+    <button onclick="sendData()">Send</button>
+    <p id="response"></p>
+</body>
+</html>
