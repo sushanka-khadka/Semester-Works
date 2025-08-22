@@ -1,0 +1,31 @@
+<!-- Frontend using jQuery -->
+ <!DOCTYPE html>
+<html>
+<head>
+    <title>jQuery AJAX Example</title>
+    <!-- jQuery CDN -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        function sendData() {
+            var name= $('#name').val();
+            $.ajax({
+               url: '39.d.php',     // Target PHP script
+                type: 'POST',          // HTTP method
+                data: { name: name },  // Data to send
+                success: function(response){
+                    $('#response').html(response); // Display response
+                },
+                error: function() {
+                    $('#response').html('Error contacting server.');
+                }
+            });
+        }
+    </script>
+</head>
+<body>
+    <h3>jQuery AJAX POST Request</h3>
+    <input type="text" id="name" placeholder="Enter your name">
+    <button onclick="sendData()">Send Data</button> 
+    <p id="response"></p>
+</body>
+</html> 
