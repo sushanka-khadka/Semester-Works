@@ -4,11 +4,6 @@ using EF_Core_DB_First.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages.Manage;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace EF_Core_DB_First.Controllers
 {
@@ -56,7 +51,7 @@ namespace EF_Core_DB_First.Controllers
         public IActionResult Create()
         {
             //ViewData["EmpId"] = new SelectList(_context.Employees, "EmpId", "Address");
-            ViewData["EmpId"] = new SelectList(_context.Employees, "EmpId", "EmpId");
+            ViewData["EmpId"] = new SelectList(_context.Employees, "EmpId", "FullName");
             return View();
         }
 
@@ -104,7 +99,7 @@ namespace EF_Core_DB_First.Controllers
                 return NotFound();
             }
             //ViewData["EmpId"] = new SelectList(_context.Employees, "EmpId", "Address", parent.EmpId);
-            ViewData["EmpId"] = new SelectList(_context.Employees, "EmpId", "EmpId", parent.EmpId);
+            ViewData["EmpId"] = new SelectList(_context.Employees, "EmpId", "FullName", parent.EmpId);
             return View(parent);
         }
 

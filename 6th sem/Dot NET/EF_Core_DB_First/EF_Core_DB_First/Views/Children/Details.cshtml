@@ -1,4 +1,4 @@
-﻿@model EF_Core_DB_First.Models.Child
+﻿@model EF_Core_DB_First.ViewModels.ChildViewModel
 
 @{
     ViewData["Title"] = "Details";
@@ -21,18 +21,18 @@
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Gender)
-        </dd>
+        </dd>        
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Parents)
+            @Html.DisplayNameFor(model => model.AvailableParents)
         </dt>
         <dd class="col-sm-10">
             <ul>
-            @foreach(var parent in Model.Parents)
-            {
-                <li>
-                    @Html.DisplayFor(model => parent.Name)
-                </li>
-            }
+                @foreach (var parent in Model.AvailableParents)
+                {
+                    <li>
+                        @Html.DisplayFor(model => parent.Text)
+                    </li>
+                }
             </ul>
         </dd>
     </dl>

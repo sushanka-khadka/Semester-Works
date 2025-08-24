@@ -2,7 +2,6 @@
 using EF_Core_DB_First.Models;
 using EF_Core_DB_First.ViewModels;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.EntityFrameworkCore;
 
 namespace EF_Core_DB_First.Controllers
@@ -90,7 +89,7 @@ namespace EF_Core_DB_First.Controllers
                     Phone = employeeVM.Phone,
                     IsMarried = employeeVM.IsMarried,
                     Gender = employeeVM.Gender,
-                    };  // Parent navigation is optional (as some employee may be single)
+                };  // Parent navigation is optional (as some employee may be single)
                 
                 _context.Add(employee);     // add to database
                 await _context.SaveChangesAsync();
