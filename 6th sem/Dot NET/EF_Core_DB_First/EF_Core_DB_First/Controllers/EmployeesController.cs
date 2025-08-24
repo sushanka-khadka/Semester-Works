@@ -1,4 +1,5 @@
 ﻿using EF_Core_DB_First.Data;
+using EF_Core_DB_First.Extenstions;
 using EF_Core_DB_First.Models;
 using EF_Core_DB_First.ViewModels;
 using Microsoft.AspNetCore.Mvc;
@@ -22,7 +23,7 @@ namespace EF_Core_DB_First.Controllers
             Whereas in ToListAsync() =>  current thread can do other work while waiting for results. */
             //var eF_Core_DbContext = await _context.Employees.ToListAsync();  // will return Model 
 
-            var eF_Core_DbContext = _context.Employees.Select(e => new EmployeeViewModel
+            /*var eF_Core_DbContext = _context.Employees.Select(e => new EmployeeViewModel
             {
                 EmpId = e.EmpId,
                 FullName = e.FullName,
@@ -30,7 +31,8 @@ namespace EF_Core_DB_First.Controllers
                 Phone = e.Phone,
                 IsMarried = e.IsMarried,
                 Gender = e.Gender,
-            }).ToListAsync();
+            }).ToListAsync(); */
+            var eF_Core_DbContext = _context.Employees.Select(e => e.ToViewModel()).ToListAsync();  // reduce             
             return View(await eF_Core_DbContext); 
         }
 
@@ -45,15 +47,9 @@ namespace EF_Core_DB_First.Controllers
             //var employee = await _context.Employees     // can work with entity Model but may leak Sensitive data
             //    .FirstOrDefaultAsync(m => m.EmpId == id);
 
-            var employeeVM= await _context.Employees.Select(e => new EmployeeViewModel
-            {
-                EmpId = e.EmpId,
-                FullName = e.FullName,
-                Address = e.Address,
-                Phone = e.Phone,
-                IsMarried = e.IsMarried,
-                Gender = e.Gender,
-            }).SingleOrDefaultAsync(e => e.EmpId == id);    // if found exactly one matches (as EmpId is PK)
+            //var employeeVM= await _context.Employees.Select(e => e.ToViewModel()).SingleOrDefaultAsync(e => e.EmpId == id);    // EF Core cannot filter on ViewModels, only on entities.(filter first then map)
+            var employee = await _context.Employees.SingleOrDefaultAsync(e => e.EmpId == id);
+            var employeeVM = employee?.ToViewModel();
 
             if (employeeVM == null)
             {
@@ -110,15 +106,9 @@ namespace EF_Core_DB_First.Controllers
             /* FindAsync = only for EF-tracked entities (models in DbSet<>).
              A ViewModel is not tracked by EF Core because it’s just a plain C# class used to carry data to/from the UI 
             — it doesn’t map directly to a database table, and it has no concept of a primary key inside EF.*/
-            var employeeVM = await _context.Employees.Select(e => new EmployeeViewModel
-            {
-                EmpId = e.EmpId,
-                FullName = e.FullName,
-                Address = e.Address,
-                Phone = e.Phone,
-                IsMarried = e.IsMarried,
-                Gender = e.Gender,
-            }).SingleOrDefaultAsync(e => e.EmpId == id);    // can't use 
+            
+            var employee = await _context.Employees.SingleOrDefaultAsync(e => e.EmpId == id);
+            var employeeVM = employee?.ToViewModel();
 
             if (employeeVM == null)
             {
@@ -179,22 +169,15 @@ namespace EF_Core_DB_First.Controllers
                 return NotFound();
             }
 
-            var employee = await _context.Employees.Select(e => new EmployeeViewModel
-            {
-                EmpId = e.EmpId,
-                FullName = e.FullName,
-                Address = e.Address,
-                Phone = e.Phone,
-                IsMarried = e.IsMarried,
-                Gender = e.Gender,
-            })
-                .FirstOrDefaultAsync(m => m.EmpId == id);
+            var employee = await _context.Employees.SingleOrDefaultAsync(e => e.EmpId == id);
+            var employeeVM = employee?.ToViewModel();
+
             if (employee == null)
             {
                 return NotFound();
             }
 
-            return View(employee);
+            return View(employeeVM);
         }
 
         // POST: Employees/Delete/5

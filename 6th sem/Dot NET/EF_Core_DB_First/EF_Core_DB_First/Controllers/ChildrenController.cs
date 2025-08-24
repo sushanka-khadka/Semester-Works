@@ -31,8 +31,8 @@ namespace EF_Core_DB_First.Controllers
                 return NotFound();
             }
 
-            var child = await _context.Children.Include(c => c.Parents)
-                .FirstOrDefaultAsync(m => m.ChildId == id);     // returning navigation property can be risky
+            //var child = await _context.Children.Include(c => c.Parents)
+            //    .FirstOrDefaultAsync(m => m.ChildId == id);     // returning navigation property can be risky
             var childVM = await _context.Children.Select(c => new ChildViewModel
             {
                 ChildId = c.ChildId,
@@ -46,7 +46,7 @@ namespace EF_Core_DB_First.Controllers
                 }).ToList()
             }).SingleOrDefaultAsync(c => c.ChildId == id);
 
-            if (child == null)
+            if (childVM == null)
             {
                 return NotFound();
             }
@@ -204,18 +204,23 @@ namespace EF_Core_DB_First.Controllers
             {
                 return NotFound();
             }
-            var childVM = new ChildViewModel
+
+            var childVM = await _context.Children.Select(c => new ChildViewModel
             {
-                AvailableParents = await _context.Parents.Select(p => new SelectListItem
+                ChildId = c.ChildId,
+                Name = c.Name,
+                Gender = c.Gender,
+                AvailableParents = c.Parents.Select(p => new SelectListItem
                 {
                     Value = p.ParentId.ToString(),
                     Text = p.Name,
                     Selected = false
-                }).ToListAsync()
-            };
+                }).ToList()
+             }).SingleOrDefaultAsync(c => c.ChildId == id);
+
 
             //var child = await _context.Children.Include(c => c.Parents)
-                //.FirstOrDefaultAsync(m => m.ChildId == id);
+            //.FirstOrDefaultAsync(m => m.ChildId == id);   // returning navigation property can be risky
             if (childVM == null)
             {
                 return NotFound();
