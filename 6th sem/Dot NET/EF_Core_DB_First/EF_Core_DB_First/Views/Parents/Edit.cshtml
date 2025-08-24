@@ -14,19 +14,31 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="ParentId" />
             <div class="form-group">
+                <label for="EmployeeDropdown">Select Employee</label>
+                <select id="EmployeeDropdown" class="form-control">
+                    <option value="">-- Select Employee --</option>
+                    @foreach(var emp in ViewBag.EmpId)
+                    {
+                        <option value="@emp.Value">@emp.Text</option>
+					}    
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="EmpId" class="control-label"></label>
+                <input id="EmpId" asp-for="EmpId" class="form-control" readonly/>
+                <span asp-validation-for="EmpId" class="text-danger"></span>
+            </div>
+            
+            <div class="form-group">
                 <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
+                <input id="Name" asp-for="Name" class="form-control" readonly/>
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="HasChildren" class="control-label"></label>
                 <input asp-for="HasChildren" class="form-control" />
                 <span asp-validation-for="HasChildren" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="EmpId" class="control-label"></label>
-                <select asp-for="EmpId" class="form-control" asp-items="ViewBag.EmpId"></select>
-                <span asp-validation-for="EmpId" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
@@ -41,4 +53,18 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script>
+        document.getElementById("EmployeeDropdown").addEventListener("change", function(){
+			var selectedOption = this.options[this.selectedIndex];
+			var empId = selectedOption.value;
+			var empName = selectedOption.text;
+
+            // Set Parent Name
+			document.getElementById("Name").value = empName;
+
+			// Set hidden EmpId field
+			document.getElementById("EmpId").value = empId;
+        });
+    </script>
 }

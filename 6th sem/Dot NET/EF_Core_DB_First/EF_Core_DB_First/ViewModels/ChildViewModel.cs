@@ -16,6 +16,6 @@ namespace EF_Core_DB_First.ViewModels
         // selected parentIds from dropdown/multiselect
         public List<int> SelectedParentIds { get; set; }
         // selected list items
-        public List<SelectListItem> AvailableParents { get; set; }
+        public List<SelectListItem> AvailableParents { get; set; } = new List<SelectListItem>(); // for multi-select dropdown (without using ViewBag/ViewData)
     }
 }
