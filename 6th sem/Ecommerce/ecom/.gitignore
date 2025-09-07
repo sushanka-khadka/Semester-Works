@@ -1,0 +1,22 @@
+# Python cache/compiled files
+__pycache__/
+
+# Virtual environment
+../.ecom/
+
+db.sqlite3
+media/
+staticfiles/
+static/
+
+# If using Django migrations cache (keep migrations but ignore pycache)
+*/migrations/__pycache__/
+
+# Environment files
+*.env
+
+
+# IDE / Editor
+.vscode/
+.vs/
+.idea/
