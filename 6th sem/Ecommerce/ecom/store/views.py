@@ -1,11 +1,9 @@
 from django.shortcuts import render, redirect
-from .models import Product
+from .models import Product, Category
 from django.http import HttpResponse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
-from django.contrib.auth.models import User
-from django.contrib.auth.forms import UserCreationForm
-from django import forms
+from .forms import SignUpForm
 
 # Create your views here.
 def home(request):
@@ -38,6 +36,49 @@ def logout_user(request):
     messages.success(request=request, message="Logout Successfully!!!")
     return redirect('home')
 
-
 def register_user(request):
-    return render(request, 'register.html')
+    form = SignUpForm()
+    if request.method == 'POST':
+        form = SignUpForm(request.POST)
+        if form.is_valid():
+            form.save()     # creates and saves the new user to the db
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password1']   # extract ceredentails from the form
+            user = authenticate(request=request, username=username, password=password) # check if a user with that ceredentails exists if password is correct return user else none
+            if user is not None:    # if user exixts
+                login(request, user)        # automatically log in 
+                messages.success(request, "Your registration is successful.")
+                return redirect('home')
+        else:
+            print(form)
+            print(form.cleaned_data)
+            messages.error(request, "There was a problem registering the user.")
+            return render(request, 'register.html', {'form': form})
+    else:
+        return render(request, 'register.html', {
+            'form' : form
+        })
+    
+
+def product_details(request, product_key):
+    product = Product.objects.get(id = product_key)
+    return render(request, 'product.html', {
+        'product':product
+    })
+
+
+def category(request, category_item):
+    # replace Hypens with spaces
+    category_item = category_item.replace('-', ' ')
+    try:
+        # grab the category form the url
+        category = Category.objects.get(name=category_item)
+        products = Product.objects.filter(category = category)
+        
+        return render(request, 'category.html', {
+            'products':products,
+            'category':category
+        })
+    except:
+        messages.error(request, "That category doesn't exist.")
+        return redirect('home')
