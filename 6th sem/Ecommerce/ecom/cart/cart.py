@@ -39,4 +39,21 @@ class Cart():
 
         # return those looked up products
         return products
+    
+    def get_quantities(self): 
+        quants = self.cart
+        return quants   #  {'3': 5, '1': 3}}
+    
+
+    def update(self, product, quantity):
+        product_id = str(product.id)
+        product_qty = int(quantity)
+
+        self.cart[product_id] = product_qty
+        self.session.modified = True
+
+        return self.cart    # retun cart session
+        
+        
+
 
