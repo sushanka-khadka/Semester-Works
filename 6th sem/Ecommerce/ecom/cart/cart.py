@@ -1,3 +1,5 @@
+from store.models import Product
+
 class Cart():
     def __init__(self, request):    #  Connects the cart to the user’s request.session.
         self.session = request.session      #  attach the user's session to this cart object
@@ -19,4 +21,17 @@ class Cart():
         else:   # add product under key, storing its price
             self.cart[product_id] = {'price' : str(product.price)}
 
-            self.session.modified =  True
+        self.session.modified =  True
+    
+    def __len__(self):
+        return len(self.cart)
+    
+    def get_products(self):
+        # get ids from cart
+        product_ids = self.cart.keys()
+        print(product_ids)
+        products = Product.objects.filter(id__in = product_ids)
+
+        # return those looked up products
+        return products
+
