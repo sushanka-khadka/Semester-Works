@@ -17,12 +17,18 @@ def cart_add(request):
     # json response
     if request.POST.get('action') == 'post':
         product_id = int(request.POST.get('product_id'))
+        product_qty = int(request.POST.get('product_qty'))
+
         # lookup products in DB
         product = get_object_or_404(Product, id=product_id) #  Fetches the corresponding product object from the database.
         # save to the session
-        cart.add(product= product)
+        cart.add(product= product, quantity=product_qty)
+
+        # get cart quantity
+        cart_quanity = cart.__len__()
+
         # return response
-        response = JsonResponse({'Product name':product.name})
+        response = JsonResponse({'qty':cart_quanity})
         return response
     
 

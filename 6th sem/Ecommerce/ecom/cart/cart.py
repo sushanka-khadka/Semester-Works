@@ -14,17 +14,22 @@ class Cart():
         # cart should be available on all pages of site
         self.cart = cart        # Stores the result in self.cart, so all cart operations happen on this dictionary.
 
-    def add(self, product):
+
+    def add(self, product, quantity):
         product_id = str(product.id)
+        product_qty = quantity
         if product_id in self.cart:
             pass
         else:   # add product under key, storing its price
-            self.cart[product_id] = {'price' : str(product.price)}
+            # self.cart[product_id] = {'price' : str(product.price)}
+            self.cart[product_id] =  int(product_qty)
 
         self.session.modified =  True
     
-    def __len__(self):
+
+    def __len__(self):      # dunder method to display no of items in cart
         return len(self.cart)
+    
     
     def get_products(self):
         # get ids from cart
