@@ -27,6 +27,22 @@ class Cart():
         self.session.modified =  True
     
 
+    def cart_total(self):
+        product_ids = self.cart.keys()  # collect the product ids from the cart
+        products = Product.objects.filter(id__in = product_ids)    # lookup to products
+        total = 0       
+        for product_id, quantity in self.cart.items():        # dict {'1': 4}
+            product_id = int(product_id)
+            for product in products:
+                if product.id == product_id:
+                    if product.is_sale:
+                        total = total + (product.sale_price * quantity)
+                    else:
+                        total = total + (product.price * quantity)            
+        return total
+
+
+
     def __len__(self):      # dunder method to display no of items in cart
         return len(self.cart)
     
@@ -51,9 +67,20 @@ class Cart():
 
         self.cart[product_id] = product_qty
         self.session.modified = True
-
-        return self.cart    # retun cart session
         
         
+    def delete(self, product):
+        product_id = str(product.id)
+        
+        print('getting to cart.py delete')
+        print(product_id)
+        print(self.cart)
+        # delete from cart dictionary
+        if product_id in self.cart:
+            print('data is in self.cart')
+            del self.cart[product_id]
+        
+        self.session.modified = True
+        # return self.cart
 
 
