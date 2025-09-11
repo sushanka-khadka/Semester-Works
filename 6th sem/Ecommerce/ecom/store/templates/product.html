@@ -94,7 +94,7 @@
     e.preventDefault();   // stops the default action (like submitting a form or following a link).
     $.ajax({    // send the request manually via AJAX.
       type:'POST',
-      url: '{% url "cart-add" %}',  // generate the URL of the cart-add
+      url: '{% url "add-cart" %}',  // generate the URL of the add-cart
       data: {   // payload sent to the server:
         action: 'post',
         csrfmiddlewaretoken: '{{ csrf_token }}',   // Django requires a CSRF token for all POST requests.

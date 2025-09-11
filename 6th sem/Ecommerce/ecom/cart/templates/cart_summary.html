@@ -65,8 +65,29 @@
                     </div>
 
                     {% endif %}
+                    <br>
+                    <div class="row justify-content-center">
+                        <div class="col-md-2">Quantity:</div>
+                        <div class="col-md-2">
+                            <select class="form-select form-select-sm" id="select_{{product.id}}">
+                            {% for key, value in quantities.items %}
+                                {% if key == product.id|slugify %}
+                                    <option selected>{{ value }}</option>
+                                {% endif %}
+                            {% endfor %}
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            </select>
+                        </div>                        
+                    </div>
+                    <br>                    
 
                     <a class="btn btn-secondary" href="{% url 'home' %}">Home</a>                    
+                    <button data-index="{{ product.id }}" class="btn btn-secondary update-cart">Update</button>
                 </center>
                 </div>
             </div>
@@ -80,5 +101,31 @@
         <a class="btn btn-secondary" href="{% url 'home' %}">Start Shopping Now!</a>    {% endif %}
     
     <br><br><br><br><br><br>
+
+<script>
+  // jQuery + Django AJAX snippet for adding a product to a cart without refreshing the page
+  $(document).on('click', '.update-cart', function(e){   // Waits for a click event on an element with id add-cart.
+    e.preventDefault();   // stops the default action (like submitting a form or following a link).
+    // grab the product id
+    product_id = $(this).data('index')
+
+    $.ajax({    // send the request manually via AJAX.
+      type:'POST',
+      url: '{% url "update-cart" %}',  // generate the URL of the name update-cart
+      data: {   // payload sent to the server:
+        action: 'post',
+        csrfmiddlewaretoken: '{{ csrf_token }}',   // Django requires a CSRF token for all POST requests.
+        product_id: $(this).data('index'),
+        product_qty: $('#select_' + product_id + ' option:selected').text()
+      },
+      success: function(json){
+        // document.getElementById('cart_quantity').textContent = json.qty;
+        // console.log(json);    // If the server responds successfully, log the returned JSON response in the console.
+      },
+      error: function(xhr, errmsg, err) { }
+    });
+  });  
+</script>
+
 
 {% endblock %}
