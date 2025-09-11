@@ -88,6 +88,7 @@
 
                     <a class="btn btn-secondary" href="{% url 'home' %}">Home</a>                    
                     <button data-index="{{ product.id }}" class="btn btn-secondary update-cart">Update</button>
+                    <button data-index="{{ product.id }}" class="btn btn-danger remove-product">Remove</button>
                 </center>
                 </div>
             </div>
@@ -95,6 +96,8 @@
         </div>
     </div>
     {% endfor %}
+    <h3>Total: ${{ totals }}</h3>
+
 
     {% else %}
         <p>There's Nothing in Your Cart.</p>
@@ -119,12 +122,31 @@
         product_qty: $('#select_' + product_id + ' option:selected').text()
       },
       success: function(json){
-        // document.getElementById('cart_quantity').textContent = json.qty;
-        // console.log(json);    // If the server responds successfully, log the returned JSON response in the console.
+        location.reload();
       },
       error: function(xhr, errmsg, err) { }
     });
   });  
+
+
+  $(document).on('click', '.remove-product', function(e) {
+    e.preventDefault();
+
+    $.ajax({
+        type: 'POST',
+        url: '{% url "delete-cart" %}',
+        data: {
+            action: 'post',
+            csrfmiddlewaretoken: '{{ csrf_token }}',
+            product_id: $(this).data('index')
+        },
+        success: function(json) {
+            // console.log(json);
+            location.reload();
+        },
+        error: function(xhr, errmsg, err) { }
+    });
+  })
 </script>
 
 
