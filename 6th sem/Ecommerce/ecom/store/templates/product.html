@@ -42,8 +42,7 @@
                   <div class="bi-star-fill"></div>
                 </div>
                 <!-- Product price-->
-                <strike>${{ product.price }}</strike> &nbsp;${{
-                product.sale_price }}
+                <strike>${{ product.price }}</strike> &nbsp;${{ product.sale_price }}
                 <br />
                 ⭐⭐⭐⭐⭐
               </div>
@@ -55,13 +54,15 @@
                 <!-- Product name-->
                 <h5 class="fw-bolder">{{ product.name }}</h5>
                 <!-- Product price-->
-                ${{ product.price }}
+                ${{ product.price }}<br>
+                ID: {{ product.id }}
               </div>
             </div>
 
             {% endif %}
 
             <a class="btn btn-secondary" href="{% url 'home' %}">Home</a>
+            <button class="btn 7btn-secondary" value="{{ product.id }}" id="add-cart">Add to cart</button>
           </center>
         </div>
       </div>
@@ -70,5 +71,34 @@
 </div>
 
 <br /><br /><br /><br />
+
+
+<script>
+  // jQuery + Django AJAX snippet for adding a product to a cart without refreshing the page
+  $(document).on('click', '#add-cart', function(e){   // Waits for a click event on an element with id add-cart.
+    e.preventDefault();   // stops the default action (like submitting a form or following a link).
+    $.ajax({    // send the request manually via AJAX.
+      type:'POST',
+      url: '{% url "cart-add" %}',  // generate the URL of the cart-add
+      data: {   // payload sent to the server:
+        action: 'post',
+        product_id: $('#add-cart').val(),
+        csrfmiddlewaretoken: '{{ csrf_token }}'   // Django requires a CSRF token for all POST requests.
+      },
+      success: function(json){
+        console.log(json);    // If the server responds successfully, log the returned JSON response in the console.
+      },
+      error: function(xhr, errmsg, err) { }
+    });
+  });
+
+  /*
+  User clicks Add to Cart button.
+  JavaScript intercepts the click, stops page reload.
+  AJAX sends product ID + CSRF token to Django backend.
+  Django view adds product to session/cart and returns JSON.
+  Success callback logs/updates UI (e.g., cart count).
+  */
+</script>
 
 {% endblock %}
