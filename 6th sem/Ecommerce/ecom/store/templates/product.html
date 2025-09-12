@@ -104,6 +104,7 @@
       success: function(json){
         document.getElementById('cart_quantity').textContent = json.qty;
         console.log(json);    // If the server responds successfully, log the returned JSON response in the console.
+        location.reload();
       },
       error: function(xhr, errmsg, err) { }
     });
