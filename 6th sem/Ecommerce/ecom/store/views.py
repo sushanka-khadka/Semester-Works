@@ -6,9 +6,14 @@ from django.contrib.auth.models import User
 from django.contrib import messages
 from .forms import SignUpForm, UpdateUserForm, ChangePasswordForm, ResetPasswordForm, UserInfoForm
 from django.db.models import Q
+import json
+from cart.cart import Cart
 
 # Create your views here.
 def home(request):
+    for key, value in {'4': 4, '1': 1}.items():
+        print(key, value)
+    
     products= Product.objects.all()
     return render(request, 'home.html', {
         'products': products
@@ -25,6 +30,22 @@ def login_user(request):
         
         if user is not None:    # Check if authentication was successful - if user exists
             login(request, user)
+            
+            current_user = Profile.objects.get(user__id = request.user.id)
+            # get their saved cart form database    (old cart)
+            saved_cart = current_user.old_cart
+            
+            if saved_cart: # chovert this python string into dict using JSON
+                json_cart = json.loads(saved_cart)
+
+                # add loaded cart to the session
+                # get the cart
+                cart = Cart(request)
+                
+                # loop through the dict and add data from the database
+                for id, qty in json_cart.items():
+                    cart.db_add(product_id=id, quantity=qty)              
+                
             messages.success(request, "Logged in successfully!")
             return redirect('home')
         else:
