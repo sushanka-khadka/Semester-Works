@@ -5,6 +5,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.contrib import messages
 from .forms import SignUpForm, UpdateUserForm, ChangePasswordForm, ResetPasswordForm, UserInfoForm
+from django.db.models import Q
 
 # Create your views here.
 def home(request):
@@ -189,7 +190,9 @@ def category_summary(request):
 def search(request):
     if request.method == 'POST':
         searched = request.POST.get('search_str')
-        available_products = Product.objects.filter(name__icontains = searched)
+        available_products = Product.objects.filter(Q(name__icontains = searched) | Q(description__icontains = searched))
+        
+        # available_products = Product.objects.filter(name__icontains = searched)
         return render(request, 'search.html', {
             'products' : available_products
         })
