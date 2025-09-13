@@ -185,3 +185,12 @@ def category_summary(request):
     return render(request, 'category-summary.html', {
         'categories' : categories
     })
+
+def search(request):
+    if request.method == 'POST':
+        searched = request.POST.get('search_str')
+        available_products = Product.objects.filter(name__icontains = searched)
+        return render(request, 'search.html', {
+            'products' : available_products
+        })
+    return render(request, 'search.html')
