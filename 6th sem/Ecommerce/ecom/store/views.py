@@ -1,10 +1,10 @@
 from django.shortcuts import render, redirect
-from .models import Product, Category
+from .models import Product, Category, Profile
 from django.http import HttpResponse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.contrib import messages
-from .forms import SignUpForm, UpdateUserForm, ChangePasswordForm, ResetPasswordForm
+from .forms import SignUpForm, UpdateUserForm, ChangePasswordForm, ResetPasswordForm, UserInfoForm
 
 # Create your views here.
 def home(request):
@@ -47,8 +47,8 @@ def register_user(request):
             user = authenticate(request=request, username=username, password=password) # check if a user with that ceredentails exists if password is correct return user else none
             if user is not None:    # if user exixts
                 login(request, user)        # automatically log in 
-                messages.success(request, "Your registration is successful.")
-                return redirect('home')
+                messages.success(request, "Username created. Please fill out your info below!")
+                return redirect('update-info')
         else:
             messages.error(request, "There was a problem registering the user.")
             return render(request, 'register.html', {'form': form})
@@ -73,9 +73,21 @@ def update_user(request):
             'user_form' : user_form
         })
     else:
-        messages.error(request, 'You must be logged in to access this page.')
+        messages.error(request, 'You must be logged in to update profile.')
         return redirect('login')            
     
+def update_info(request):
+    if request.user.is_authenticated:
+        current_user = Profile.objects.get(user__id = request.user.id)
+        form = UserInfoForm(request.POST or None, instance=current_user)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Your information has been Updated...')
+            return redirect('home')
+        return render(request, 'update-info.html', { 'form' : form })
+    else:
+        messages.error(request, 'You must be logged in to update information.')
+        return redirect('login')
 
 def change_password(request):
     if request.user.is_authenticated:
