@@ -15,10 +15,11 @@
     <div class="container">
         <div class="row">
             <div class="col-md-6 offset-md-3">
-                <br><br>
+                <br>
                 <form  action="{% url 'update-info' %}" method="post">
                     {% csrf_token %}
                     
+                    <strong>Billing Information</strong><br><br>
                     {% for field in form %}
                         <div class="form-group mb-3">
                             {{ field }}
@@ -32,10 +33,15 @@
                             </div>
                         </div>
                     {% endfor %}
+                    <br>
+                    
+                    <strong>Shipping Information</strong><br><br>
+                    {{ shipping_form.as_p }}
+
+                    <br>
                     <button type="submit" class="btn btn-secondary">Update Info</button>                    
-                </form>
-    
-                <br><br>
+                </form>    
+                <br>
             </div>
         </div>
     </div>    
