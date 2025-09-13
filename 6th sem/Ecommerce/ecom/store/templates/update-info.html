@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <!-- Header-->
+    <header class="bg-dark py-5">
+        <div class="container px-4 px-lg-5 my-5">
+            <div class="text-center text-white">
+                <h1 class="display-4 fw-bolder">Update Info</h1>
+                <p class="lead fw-normal text-white-50 mb-0">Update user info.</p>
+            </div>
+        </div>
+    </header>
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <br><br>
+                <form  action="{% url 'update-info' %}" method="post">
+                    {% csrf_token %}
+                    
+                    {% for field in form %}
+                        <div class="form-group mb-3">
+                            {{ field }}
+                            {% if field.help_text %}
+                                {{ field.help_text|safe }}
+                            {% endif %}
+                            <div class="text-danger small">
+                                {% for error in field.errors %}
+                                    {{ error }}
+                                {% endfor %}
+                            </div>
+                        </div>
+                    {% endfor %}
+                    <button type="submit" class="btn btn-secondary">Update Info</button>                    
+                </form>
+    
+                <br><br>
+            </div>
+        </div>
+    </div>    
+{% endblock %}
