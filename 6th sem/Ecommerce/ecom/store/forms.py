@@ -73,7 +73,7 @@ class UserInfoForm(forms.ModelForm):
     
     class Meta:
         model = Profile
-        exclude = ['user', 'date_modified']
+        exclude = ['user', 'date_modified', 'old_cart']
         
 
 
