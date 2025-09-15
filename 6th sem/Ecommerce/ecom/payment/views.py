@@ -4,6 +4,7 @@ from .forms import ShippingForm, PaymentForm
 from .models import ShippingAddress, Order, OrderItem
 from django.contrib.auth.models import User
 from django.contrib import messages
+import datetime
 
 # Create your views here.
 def payment_success(request):
@@ -140,19 +141,21 @@ def shipped_dash(request):
 
 def orders(request, pk):
     if request.user.is_authenticated and request.user.is_superuser:
-        order = Order.objects.get(id = pk)
+        order = Order.objects.get(id = pk)        
         # get the order items
         items = OrderItem.objects.filter(order=order)
 
         if request.POST:
+            order = Order.objects.filter(id = pk)
             status = request.POST['shipping_status']
             if status == 'true':                
-                order.shipped = True    # only work for single object
-                order.save()
+                # order.shipped = True    # only work for single object
+                # order.save()
+                now = datetime.datetime.now()
+                order.update(shipped=True, date_shipped=now)  # QuerySet method
                 
             else:
-                order.shipped = False
-                order.save()
+                order.update(shipped=False)
             
             messages.success(request, 'Shipping Status Updated')
             return redirect('home')              
