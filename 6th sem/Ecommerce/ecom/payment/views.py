@@ -113,3 +113,26 @@ def process_order(request):
     else:
         messages.error(request, "Access Denied.")
         return redirect('home')      
+    
+
+def not_shipped_dash(request):
+    if request.user.is_authenticated and request.user.is_superuser: # logged in as admin
+        unshipped_orders = Order.objects.filter(shipped = False)
+
+        return render(request, 'not-shipped-dash.html', {
+            'unshipped_orders' : unshipped_orders
+        })
+    else:
+        messages.error(request, 'Access Denied')
+        return redirect('home')
+
+def shipped_dash(request):
+    if request.user.is_authenticated and request.user.is_superuser: # logged in as admin
+        shipped_orders = Order.objects.filter(shipped = True)
+
+        return render(request, 'shipped-dash.html', {
+            'shipped_orders' : shipped_orders
+        })
+    else:
+        messages.error(request, 'Access Denied')
+        return redirect('home')
