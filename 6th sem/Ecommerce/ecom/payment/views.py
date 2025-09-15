@@ -1,8 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from cart.cart import Cart
 from .forms import ShippingForm
 from .models import ShippingAddress
 from django.contrib.auth.models import User
+from django.contrib import messages
 
 # Create your views here.
 def payment_success(request):
@@ -26,3 +27,26 @@ def checkout(request):
         'totals': totals,
         'shipping_form': shipping_form
     })
+
+
+def billing_info(request):
+    if request.POST:
+        cart = Cart(request)    # get cart object
+        cart_products = cart.get_products()
+        quantities = cart.get_quantities()
+        totals = cart.cart_total()
+        
+        shipping_info = request.POST
+        # check if user is logged in 
+        if request.user.is_authenticated:
+            return render(request, 'billing-info.html', {
+                'cart_products': cart_products,
+                'quantities' : quantities,
+                'totals': totals,
+                'shipping_info': shipping_info
+            })
+        else:
+            return redirect('login')
+    else:
+        messages.error(request, "Access Denied.")
+        return redirect('checkout')
