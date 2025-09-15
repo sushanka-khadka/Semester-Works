@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from cart.cart import Cart
 from .forms import ShippingForm, PaymentForm
-from .models import ShippingAddress
+from .models import ShippingAddress, Order, OrderItem
 from django.contrib.auth.models import User
 from django.contrib import messages
 
@@ -37,6 +37,10 @@ def billing_info(request):
         totals = cart.cart_total()
         
         shipping_info = request.POST
+
+        # create a session with Shipped info
+        request.session['my_shipping'] = shipping_info
+
         # check if user is logged in 
         if request.user.is_authenticated:
             # get the billing form
@@ -64,4 +68,39 @@ def billing_info(request):
     
 
 def process_order(request):
-    return render(request, 'process-order.html')
+    if request.POST:     # if any form data from previous billing info
+        cart = Cart(request)    # get cart object
+        cart_products = cart.get_products()
+        quantities = cart.get_quantities()
+        totals = cart.cart_total()
+
+        # get billing info from last page
+        payment_form = PaymentForm(request.POST or None)        
+        #  get shipping Session data
+        my_shipping = request.session.get('my_shipping')
+        print(my_shipping)
+
+        # gather order info
+        full_name = my_shipping['shipping_full_name']
+        email = my_shipping['shipping_email']
+        
+        # create shipping address from session data
+        shipping_address = f"{my_shipping['shipping_address1']} \n{my_shipping['shipping_address2']} \n{my_shipping['shipping_city']} \n{my_shipping['shipping_zipcode']} \n{my_shipping['shipping_country']}"
+        
+        amount_paid = totals
+
+        if request.user.is_authenticated:
+            user = request.user
+            # create order
+            create_order = Order(user=user, full_name=full_name, email=email, shipping_address=shipping_address, amount_paid=amount_paid)
+            create_order.save()
+            messages.success(request, "Order Placed.")
+            return redirect('home')
+        else:   # not logged in
+            create_order = Order(full_name=full_name, email=email, shipping_address=shipping_address, amount_paid=amount_paid)
+            create_order.save()
+            messages.success(request, "Order Placed.")
+            return redirect('home')
+    else:
+        messages.error(request, "Access Denied.")
+        return redirect('home')

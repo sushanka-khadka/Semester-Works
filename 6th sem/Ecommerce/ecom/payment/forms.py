@@ -4,7 +4,7 @@ from .models import User, ShippingAddress
 
 class ShippingForm(forms.ModelForm):
     shipping_full_name= forms.CharField(max_length=100, label='', widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'Full Name'}))
-    shipping_email = forms.EmailField(label='', widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'Email Address'}))
+    shipping_email = forms.EmailField(label='', widget=forms.EmailInput(attrs={'class':'form-control', 'placeholder':'Email Address'}))
     shipping_address1= forms.CharField(max_length=200, label='', widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'Address 1'}))
     shipping_address2= forms.CharField(max_length=200, label='', widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'Address 2'}), required=False)
     shipping_city = forms.CharField(max_length=100, label='', widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'City'}), required=False)
