@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load static %}
+    
+{% block content %}
+    <!-- Header-->
+    <header class="bg-dark py-5">
+        <div class="container px-4 px-lg-5 my-5">
+            <div class="text-center text-white">
+                <h1 class="display-4 fw-bolder">Unshipped Orders</h1>
+                <p class="lead fw-normal text-white-50 mb-0">Orders will be shipped shortly.</p>
+            </div>
+        </div>
+    </header>
+    <br><br>
+
+    <div class="container">
+        <div class="row">
+            <center>
+                <div class="col-8">
+                    <table class="table table-striped table-hover table-bordered">
+                        <thead class="table-dark">
+                            <tr>                            
+                            <th scope="col">Orders</th>
+                            <th scope="col">Price</th>
+                            <th scope="col">Customer Email</th>
+                            <th scope="col">Date Ordered</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for order in unshipped_orders %}
+                            <tr>
+                            <td>{{ order.id }}</td>
+                            <td>${{ order.amount_paid }}</td>
+                            <td>{{ order.email }}</td>
+                            <td>{{ order.date_ordered }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </center>
+        </div>
+    </div>
+    <br>
+    
+{% endblock %}
