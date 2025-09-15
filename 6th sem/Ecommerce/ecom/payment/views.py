@@ -141,7 +141,23 @@ def shipped_dash(request):
 def orders(request, pk):
     if request.user.is_authenticated and request.user.is_superuser:
         order = Order.objects.get(id = pk)
+        # get the order items
         items = OrderItem.objects.filter(order=order)
+
+        if request.POST:
+            status = request.POST['shipping_status']
+            if status == 'true':                
+                order.shipped = True    # only work for single object
+                order.save()
+                
+            else:
+                order.shipped = False
+                order.save()
+            
+            messages.success(request, 'Shipping Status Updated')
+            return redirect('home')              
+
+
 
         return render(request, 'orders.html', {
             'order':order,
