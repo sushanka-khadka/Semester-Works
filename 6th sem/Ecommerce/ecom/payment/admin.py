@@ -14,6 +14,7 @@ class OrderItemInline(admin.StackedInline):
 # Extend Order Model
 class OrderAdmin(admin.ModelAdmin):
     model = Order
+    fields = ['user', 'full_name', 'email', 'shipping_address', 'amount_paid', 'date_ordered', 'shipped', 'date_shipped']
     readonly_fields = ['date_ordered']
     inlines = [OrderItemInline]
 
