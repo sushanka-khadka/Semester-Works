@@ -15,83 +15,82 @@
     
     {% if cart_products %}
 
-    {% for product in cart_products %}
     <div class="container">
+        {% for product in cart_products %}
         <div class="card mb-3">
             <div class="row g-0">
-            <div class="col-md-4">
-                <img src="{{ product.image.url }}" class="img-fluid rounded-start" alt="..." />
-            </div>
-            <div class="col-md-8">
-                <div class="card-body">
-                <center>
-                    <h5 class="card-title">{{ product.name }}</h5><br>
-                    <p class="card-text justified">{{ product.description }}</p>
-
-                    {% if product.is_sale %}
-                    <!-- Sale badge-->
-                    <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">
-                    Sale
-                    </div>
-                    <!-- Product details-->
-                    <div class="card-body p-4">
-                    <div class="text-center">
-                        <!-- Product name-->
-                        <h5 class="fw-bolder">{{ product.name }}</h5>
-                        <!-- Product reviews-->
-                        <div class="d-flex justify-content-center small text-warning mb-2">
-                        <div class="bi-star-fill"></div>
-                        <div class="bi-star-fill"></div>
-                        <div class="bi-star-fill"></div>
-                        <div class="bi-star-fill"></div>
-                        <div class="bi-star-fill"></div>
-                        </div>
-                        <!-- Product price-->
-                        <strike>${{ product.price }}</strike> &nbsp;${{ product.sale_price }}
-                        <br />
-                        ⭐⭐⭐⭐⭐
-                    </div>
-                    </div>
-                    {% else %}
-                    <!-- Product details-->
-                    <div class="card-body p-4">
-                    <div class="text-center">
-                        <!-- Product name-->
-                        <h5 class="fw-bolder">{{ product.name }}</h5>
-                        <!-- Product price-->
-                        ${{ product.price }}<br>
-                        ID: {{ product.id }}
-                    </div>
-                    </div>
-
-                    {% endif %}
-                    <br>
-                    <div class="row justify-content-center">
-                        <div class="col-md-2">Quantity:</div>
-                        <div class="col-md-2">
-                            <select class="form-select form-select-sm" id="select_{{product.id}}">
-                            {% for key, value in quantities.items %}
-                                {% if key == product.id|slugify %}
-                                    <option selected>{{ value }}</option>
-                                {% endif %}
-                            {% endfor %}
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                            <option value="6">6</option>
-                            </select>
-                        </div>                        
-                    </div>
-                    <br>                    
-
-                    <a class="btn btn-secondary" href="{% url 'home' %}">Home</a>                    
-                    <button data-index="{{ product.id }}" class="btn btn-secondary update-cart">Update</button>
-                    <button data-index="{{ product.id }}" class="btn btn-danger remove-product">Remove</button>
-                </center>
+                <div class="col-md-4">
+                    <img src="{{ product.image.url }}" class="img-fluid rounded-start" alt="..." />
                 </div>
-            </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <center>
+                            <h5 class="card-title">{{ product.name }}</h5><br>
+                            <p class="card-text justified">{{ product.description }}</p>
+
+                            {% if product.is_sale %}
+                            <!-- Sale badge-->
+                            <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">
+                                Sale
+                            </div>
+                            <!-- Product details-->
+                            <div class="card-body p-4">
+                                <div class="text-center">
+                                    <!-- Product name-->
+                                    <h5 class="fw-bolder">{{ product.name }}</h5>
+                                    <!-- Product reviews-->
+                                    <div class="d-flex justify-content-center small text-warning mb-2">
+                                    <div class="bi-star-fill"></div>
+                                    <div class="bi-star-fill"></div>
+                                    <div class="bi-star-fill"></div>
+                                    <div class="bi-star-fill"></div>
+                                    <div class="bi-star-fill"></div>
+                                </div>
+                                <!-- Product price-->
+                                <strike>${{ product.price }}</strike> &nbsp;${{ product.sale_price }}
+                                <br />
+                                ⭐⭐⭐⭐⭐
+                            </div>
+                            {% else %}
+                            <!-- Product details-->
+                            <div class="card-body p-4">
+                                <div class="text-center">
+                                    <!-- Product name-->
+                                    <h5 class="fw-bolder">{{ product.name }}</h5>
+                                    <!-- Product price-->
+                                    ${{ product.price }}<br>
+                                    ID: {{ product.id }}
+                                </div>
+                            </div>
+
+                            {% endif %}
+                            <br>
+                            <div class="row justify-content-center">
+                                <div class="col-md-2">Quantity:</div>
+                                <div class="col-md-2">
+                                    <select class="form-select form-select-sm" id="select_{{product.id}}">
+                                    {% for key, value in quantities.items %}
+                                        {% if key == product.id|slugify %}
+                                            <option selected>{{ value }}</option>
+                                        {% endif %}
+                                    {% endfor %}
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    </select>
+                                </div>                        
+                            </div>
+                            <br>                    
+
+                            <a class="btn btn-secondary" href="{% url 'home' %}">Home</a>                    
+                            <button data-index="{{ product.id }}" class="btn btn-secondary update-cart">Update</button>
+                            <button data-index="{{ product.id }}" class="btn btn-danger remove-product">Remove</button>
+                        </center>
+                    </div>
+                </div>
             </div>
         </div>
         {% endfor %}
@@ -103,8 +102,15 @@
 
 
     {% else %}
-        <p>There's Nothing in Your Cart.</p>
-        <a class="btn btn-secondary" href="{% url 'home' %}">Start Shopping Now!</a>    {% endif %}
+    <div class="container">
+        <div class="row">
+            <center>                
+                <p>There's Nothing in Your Cart.</p>
+                <a class="btn btn-secondary" href="{% url 'home' %}">Start Shopping Now!</a>    
+            </center>            
+        </div>
+    </div>
+    {% endif %}
     
     <br><br><br><br><br><br>
 
