@@ -9,4 +9,11 @@ urlpatterns = [
     path('shipped_dash', views.shipped_dash, name='shipped-dash'),
     path('not_shipped_dash', views.not_shipped_dash, name='not-shipped-dash'),
     path('orders/<int:pk>', views.orders, name='orders'),
+    path('khalti/<int:totals>', views.khalti_payment, name='khalti-payment'),    
+    path('khalti_status', views.verify_khalti_payment, name='khalti-status'),
+    path('esewa_status', views.verify_esewa_payment, name='esewa-status'),
+
+    path('place_order', views.place_order, name='place-order'), 
+
+
 ]
