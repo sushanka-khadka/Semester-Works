@@ -75,6 +75,27 @@ def esewa_payment(request):
     return esewa_data
 
 
+def _verify_esewa_payment_with_api(request, json_msg):
+    amt = json_msg['total_amount']
+    oid = json_msg['transaction_uuid']
+    url = 'https://rc.esewa.com.np/api/epay/transaction/status/'
+    payload = {
+        'product_code': 'EPAYTEST',
+        'total_amount': amt,
+        'transaction_uuid': oid,
+    }
+
+    try:
+        response = requests.get(url, params=payload)
+        response.raise_for_status()  # Raise an error for bad status codes
+        json_response = response.json() # Parse JSON response
+        status = json_response.get('status')
+        return status == 'COMPLETE'     # Return True if payment is complete, else False
+    except requests.RequestException as e:
+        print(f"Error verifying eSewa payment: {e}")
+        return False
+
+
 def verify_esewa_payment(request):
     if request.GET.get('data'):
         base64_response = request.GET.get('data')
@@ -82,14 +103,16 @@ def verify_esewa_payment(request):
         decoded_msg = decoded_bytes.decode('utf-8')
         json_msg = json.loads(decoded_msg)
 
-        if json_msg['status'] == 'COMPLETE':
-            messages.success(request, 'Payment Successful')
+        # if json_msg['status'] == 'COMPLETE':
+        if _verify_esewa_payment_with_api(request, json_msg):
+            messages.success(request, 'Esewa Payment Successful')
             # proceed further
             process_order(request, json_msg['total_amount'])       
             return redirect('payment-success')
-    else:
-        messages.error(request, "Esewa Payment Verification Failed.")
-        return redirect('checkout')
+    
+    # if not verified yet,
+    messages.error(request, "Esewa Payment Verification Failed.")
+    return redirect('checkout')
 
 
 def get_khalti_payment_url(request, total_amount):
@@ -126,14 +149,36 @@ def khalti_payment(request, total_amount):
     print('\n redirecting to khalti payment url: ', payment_url)       
     return redirect(payment_url)
 
-def verify_khalti_payment(request):        
-    if request.GET.get('status') == 'Completed':     # from khalti payment
-        messages.success(request, 'Payment Successful')
-        process_order(request, request.GET.get('total_amount'))   # proceed further
+def verify_khalti_payment(request):
+    pidx = request.GET.get('pidx')
 
-        return redirect('payment-success')
-    else:
-        messages.error(request, "Khalti Payment Verification Failed.")
+    if not pidx:
+        messages.error(request, "Payment ID not found.")
+        return redirect('checkout')
+
+    url = 'https://dev.khalti.com/api/v2/epayment/lookup/'      # api for payment verification
+    payload = {"pidx": pidx}
+    headers = {
+        'Authorization': 'Key live_secret_key_68791341fdd94846a146f0457ff7b455',
+        'Content-Type': 'application/json',
+    }
+
+    try:
+        response = requests.post(url, json=payload, headers=headers)
+        response.raise_for_status()  # Raise an error for bad status codes
+        json_response = response.json() # Parse JSON response        
+
+        if json_response.get('status') == 'Completed':
+            process_order(request, json_response.get('total_amount') / 100)   # amount is in paisa
+            messages.success(request, "Khalti Payment Successful.")
+            return redirect('payment-success')
+        else:
+            messages.error(request, "Khalti Payment Not Completed. Please try again.")
+            return redirect('checkout')
+                    
+    except requests.RequestException as e:
+        print(f"Error verifying Khalti payment: {e}")
+        messages.error(request, "Khalti Payment Verification Failed. Please try again.")
         return redirect('checkout')
             
     
@@ -208,8 +253,9 @@ def place_order(request):
 
     payment_method = request.POST.get('payment_method')
     if payment_method == 'cash':
-        # process cash on delivery order payment on delivery
-        pass
+        process_order(request, order_bill['total_amount'])       
+        messages.success(request, 'Order Placed Successfully. Pay on Delivery.')
+        return redirect('payment-success')
     elif payment_method == 'esewa':
         esewa_data = esewa_payment(request)
         return render(request, 'esewa-payment.html', { 'esewa_data': esewa_data })
@@ -273,8 +319,6 @@ def process_order(request, total_amount):       # future change: add more valida
         current_user = Profile.objects.filter(user__id = request.user.id)
         # Delete shopping cart in db(old_cart field)
         current_user.update(old_cart = '')
-
-        cart.clear()    # clear the cart session
         
 
 

@@ -15,6 +15,28 @@
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="{% static 'css/styles.css' %}" rel="stylesheet" />        
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+        <style>
+            .payment-option {
+                display: flex;
+                align-items: center;   /* vertically center radio and label content */
+                min-height: 40px;      /* fixed height for uniformity */
+                padding: 0.25rem 10;    /* optional spacing */
+            }
+
+            .payment-option img {
+                max-height: 50px;      /* scale all images to same height */
+                width: auto;
+            }
+
+            .payment-option label {
+                margin-left: 0.5rem;   /* spacing between radio and label/image */
+                display: flex;
+                min-height: 40px;
+                align-items: center;   /* vertical centering of content inside label */
+            }
+        </style>
+
     </head>
 <body>
     <!-- Navigation-->
