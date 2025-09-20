@@ -30,10 +30,10 @@ def cart_add(request):
         cart.add(product= product, quantity=product_qty)
 
         # get cart quantity
-        cart_quanity = cart.__len__()
+        cart_quantity = cart.__len__()
 
         # return response
-        response = JsonResponse({'qty':cart_quanity})
+        response = JsonResponse({'qty':cart_quantity})
         messages.success(request, "Product Added to Cart.")
         return response
     
