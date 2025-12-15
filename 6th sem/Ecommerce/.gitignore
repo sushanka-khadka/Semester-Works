@@ -2,7 +2,7 @@
 __pycache__/
 
 # Virtual environment
-../.ecom/
+.ecom/
 
 db.sqlite3
 media/
@@ -20,3 +20,8 @@ static/
 .vscode/
 .vs/
 .idea/
+
+
+# ignore local drafts or backups
+epayments/
+

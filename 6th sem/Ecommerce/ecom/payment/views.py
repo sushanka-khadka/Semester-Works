@@ -230,7 +230,7 @@ def make_billing(request):
     # round to 2 decimal places & round up only if >= 5     
     tax_amount = (totals * Decimal('0.13')).quantize(Decimal('0.01'), rounding=ROUND_HALF_UP)       # 13% vat                                    
     product_service_charge = 10
-    product_delivery_charge= 1000
+    product_delivery_charge= 300    # flat delivery charge Rs. 300
     total_amount_vat_inc = (totals + tax_amount + product_service_charge + product_delivery_charge).quantize(Decimal('0.01'), rounding=ROUND_HALF_UP)
 
     order_bill = {

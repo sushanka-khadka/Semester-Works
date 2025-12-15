@@ -24,9 +24,9 @@
                         {% for product in cart_products %}
                             {{ product.name }}
                             {% if product.is_sale %}
-                                ${{ product.sale_price }}
+                                Rs. {{ product.sale_price }}
                             {% else %}
-                                ${{ product.price }}
+                                Rs. {{ product.price }}
                             {% endif %}
                             <br>
 
@@ -38,7 +38,7 @@
                             {% endfor %}</small>
                             <br><br> 
                         {% endfor %}                    
-                        Total: {{ totals }} <br><br>
+                        Total: Rs. {{ totals }} <br><br>
                         <a href="{% url 'cart-summary' %}" class="btn btn-sm btn-outline-secondary">Update Items</a>
                     </div>
                 </div>
@@ -69,34 +69,34 @@
                         Billing Information
                     </div>
                     <div class="card-body">
-                        Amount: ${{ order_bill.amount }}<br>
-                        Taxable Amount: ${{ order_bill.tax_amount }}<br>
-                        Product Service Charge: ${{ order_bill.psc }}<br>
-                        Product Delivery Charge: ${{ order_bill.pdc }}<br>
-                        Total Payable Amount: ${{ order_bill.total_amount }}<br>
+                        Amount: Rs. {{ order_bill.amount }}<br>
+                        Taxable Amount: Rs. {{ order_bill.tax_amount }}<br>
+                        Product Service Charge: Rs. {{ order_bill.psc }}<br>
+                        Product Delivery Charge: Rs. {{ order_bill.pdc }}<br>
+                        Total Payable Amount: Rs. {{ order_bill.total_amount }}<br>
                         <br><br>
 
                         <table class="table table-hover table-borderless">
                             <tbody>
                                 <tr>
                                     <td>Amount</td>
-                                    <td>$ {{ order_bill.amount }}</td>
+                                    <td>Rs. {{ order_bill.amount }}</td>
                                 </tr>
                                 <tr>
                                     <td>Taxable Amount</td>
-                                    <td>$ {{ order_bill.tax_amount }}</td>
+                                    <td>Rs. {{ order_bill.tax_amount }}</td>
                                 </tr>
                                 <tr>
                                     <td>Product Service Charge</td>
-                                    <td>$ {{ order_bill.psc }}</td>
+                                    <td>Rs. {{ order_bill.psc }}</td>
                                 </tr>
                                 <tr>
                                     <td>Product Delivery Charge</td>
-                                    <td>$ {{ order_bill.pdc }}</td>
+                                    <td>Rs. {{ order_bill.pdc }}</td>
                                 </tr>
                                 <tr>
                                     <td>Total Payable Amount</td>
-                                    <td>$ {{ order_bill.total_amount }}</td>
+                                    <td>Rs. {{ order_bill.total_amount }}</td>
                                 </tr>
                             </tbody>
                         </table>

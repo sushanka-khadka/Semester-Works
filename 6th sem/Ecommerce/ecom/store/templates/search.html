@@ -58,7 +58,7 @@
                                     <div class="bi-star-fill"></div>
                                 </div>
                                 <!-- Product price-->
-                                <strike>${{ product.price }}</strike> &nbsp;${{ product.sale_price }}
+                                <strike>Rs. {{ product.price }}</strike> &nbsp;Rs. {{ product.sale_price }}
                             </div>
                         </div>
                         {% else %}
@@ -68,7 +68,7 @@
                                 <!-- Product name-->
                                 <h5 class="fw-bolder">{{ product.name }}</h5>
                                 <!-- Product price-->
-                                ${{ product.price }}                                    
+                                Rs. {{ product.price }}                                    
                             </div>
                         </div>
                         
