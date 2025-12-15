@@ -47,7 +47,7 @@
                                     <div class="bi-star-fill"></div>
                                 </div>
                                 <!-- Product price-->
-                                <strike>${{ product.price }}</strike> &nbsp;${{ product.sale_price }}
+                                <strike>Rs. {{ product.price }}</strike> &nbsp;Rs. {{ product.sale_price }}
                                 <br />
                                 ⭐⭐⭐⭐⭐
                             </div>
@@ -58,7 +58,7 @@
                                     <!-- Product name-->
                                     <h5 class="fw-bolder">{{ product.name }}</h5>
                                     <!-- Product price-->
-                                    ${{ product.price }}<br>
+                                    Rs. {{ product.price }}<br>
                                     ID: {{ product.id }}
                                 </div>
                             </div>
@@ -95,7 +95,7 @@
         </div>
         {% endfor %}
         <div align='right'>
-            <h3>Total: ${{ totals }}</h3>
+            <h3>Total: Rs. {{ totals }}</h3>
             <a href="{% url 'checkout' %}" class="btn btn-success">Checkout</a>
         </div>
     </div>
