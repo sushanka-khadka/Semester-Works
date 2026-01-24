@@ -1,0 +1,51 @@
+﻿@model WebApp3_By_Sushanka.Models.Player
+
+@{
+    // ViewData["Title"] = "AddPlayer";
+}
+
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-4">
+            @* <h3>AddPlayer</h3> *@
+            <h3>@ViewBag.Title</h3>
+
+            <form asp-controller="CRUD" asp-action="@ViewBag.Action" method="post" asp-antiforgery="true">
+                <div class="mb-3">
+                    <label asp-for="Name" class="form-label">Player Name:</label>
+                    <input asp-for="Name"  class="form-control"/>
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="Country" class="form-label">Country:</label>
+                    <input asp-for="Country" class="form-control"/>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="Club" class="form-label">Club:</label>
+                    <input asp-for="Club" class="form-control" />
+                </div>
+                <div class="mb-3">
+                    <label asp-for="Position" class="form-label">Position:</label>
+                    <input asp-for="Position" class="form-control" />
+                </div>
+                <div class="mb-3">
+                    <label asp-for="Foot" class="form-label">Preferred Foot:</label>
+                    <select asp-for="Foot" class="form-select">
+                        <option value="">--select--</option>
+                        <option value="left">Left Foot</option>
+                        <option value="right">Right Foot</option>
+                        <option value="both">Both Foot</option>
+                    </select>
+                    <span asp-validation-for="Foot" class="text-danger"></span>
+                </div>
+       
+                <button class="btn btn-primary">@ViewBag.Button</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+@* client side validationo using unobtrusive validation *@
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

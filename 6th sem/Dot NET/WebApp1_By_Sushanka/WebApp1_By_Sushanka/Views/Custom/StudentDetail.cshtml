@@ -1,0 +1,16 @@
+﻿@model WebApp1_By_Sushanka.Models.Student   // importing Student Model as Model(default)
+@{
+    ViewData["Title"] = "StudentDetail";
+}
+
+<h1>Student Details</h1>
+
+<ul>
+    @foreach (var property in Model.GetType().GetProperties())  @* looping through all the properties of Student Model*@
+{
+    <li>@property.Name: @property.GetValue(Model)</li>
+}
+</ul>
+
+
+@* object sent from View() can be retrieved using Model *@

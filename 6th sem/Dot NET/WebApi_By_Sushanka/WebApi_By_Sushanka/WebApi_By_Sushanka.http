@@ -1,0 +1,6 @@
+@WebApi_By_Sushanka_HostAddress = http://localhost:5262
+
+GET {{WebApi_By_Sushanka_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

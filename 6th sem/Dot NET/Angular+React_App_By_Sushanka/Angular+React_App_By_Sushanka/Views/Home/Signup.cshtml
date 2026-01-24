@@ -1,0 +1,100 @@
+﻿@{
+    ViewData["Title"] = "Sign Up";
+}
+
+<div class="container mt-4" style="max-width: 600px">
+    <h4 class="text-center">Name: Sushanka Khadka | Roll no: 84/079 </h4>
+    <h5 class="text-center mb-4">Sign Up Form</h5>
+
+    <form id="signupForm" method="post" class="border p-4 shadow rounded bg-light">
+        <div class="mb-3">
+            <label for="name" class="form-label">Full Name</label>
+            <input type="text" id="name" name="name" class="form-control" />
+        </div>
+
+        <div class="mb-3">
+            <label for="email" class="form-label">Email Address</label>
+            <input type="email" id="email" name="email" class="form-control" />
+        </div>
+
+        <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input type="password" id="password" name="password" class="form-control" />
+        </div>
+
+        <div class="mb-3">
+            <label for="confirmPassword" class="form-label">Confirm Password</label>
+            <input type="password" id="confirmPassword" name="confirmPassword" class="form-control" />
+        </div>
+
+        <div class="mb-3">
+            <label for="phone" class="form-label">Phone Number</label>
+            <input type="text" id="phone" name="phone" class="form-control" />
+        </div>
+
+        <button type="submit" class="btn btn-primary w-100">Sign Up</button>
+    </form>
+</div>
+
+@section Scripts{
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation-unobtrusive@3.2.12/dist/jquery.validate.unobtrusive.min.js"></script>
+
+    <script>
+        $(document).ready(function (){
+            $("#signupForm").validate({
+                rules: {
+                    name : {
+                        required: true,
+                        minlength: 3
+                    },
+                    email: {
+                        required: true,
+                        email: true
+                    },
+                    password: {
+                        required: true,
+                        minlength: 6
+                    },
+                    confirmPassword: {
+                        required: true,
+                        equalTo: "#password"
+                    },
+                    phone: {
+                        required: true,
+                        digits: true,
+                        minlength: 10,
+                        maxlength: 10
+                    }
+                },
+
+                messages: {
+                    name: {
+                        required: "Please enter your name.",
+                        minlength: "Name must be at lease 3 characters long."
+                    },
+                    email: {
+                        required: "Please enter an email",
+                        email: "Enter a valid email address"
+                    },
+                    password: {
+                        required: "Please provide a password.",
+                        minlength: "Password must be at lease 6 characters long"
+                    },
+                    confirmPassword: {
+                        required: "Please confirm password",
+                        equalTo: "Passwords do not match"
+                    },
+                    phone: {
+                        required: "Pleae enter your phone number",
+                        digits: "Only numbers allowed",
+                        minlength: "Phone must be 10 digits",
+                        maxlength: "Phone must be 10 digits"
+                    }
+                },
+                errorClass: "text-danger"
+            });
+        });
+    </script>
+}

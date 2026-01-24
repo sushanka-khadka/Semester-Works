@@ -1,0 +1,19 @@
+﻿@{
+	ViewData["Title"] = "My Razor Page";
+	string name = ViewBag.Name;
+	int rollNo = ViewBag.RollNo;
+	int table_of = ViewBag.TableOf;
+	DateTime now = ViewBag.DateTime;
+}
+
+<h2>@ViewData["Title"]</h2>
+<span>by @name (Roll: @rollNo)</span>
+<p>Current Date: @now.ToString("dd MMM yyyy"); 
+	Current Time: @now.ToString("hh : mm tt")</p>
+<h4>Multiplication Table of @table_of</h4>
+<ul style="list-style:none">
+@for (int i=1; i<=10; i++)
+{
+	<li>@table_of x @i = @(table_of * i)</li>
+}
+</ul>

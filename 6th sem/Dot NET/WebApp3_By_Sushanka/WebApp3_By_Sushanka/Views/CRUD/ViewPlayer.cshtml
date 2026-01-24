@@ -1,0 +1,35 @@
+﻿@{
+    ViewData["Title"] = "ViewPlayer";
+}
+
+<h3>ViewPlayer</h3>
+
+<a asp-action="AddPlayer">Create</a>
+<table class="table table-striped table-bordered">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Country</th>
+            <th>Club</th>
+            <th>Position</th>
+            <th>Foot</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>@Model.Id</td>
+            <td>@Model.Name</td>
+            <td>@Model.Country</td>
+            <td>@Model.Club</td>
+            <td>@Model.Position</td>
+            <td>@Model.Foot</td>
+            <td>
+                <a asp-action="ViewPlayer" asp-route-id="@Model.Id">View</a>
+                <a asp-action="EditPlayer" asp-route-id="@Model.Id">Edit</a>
+                <a asp-action="DeletePlayer" asp-route-id="@Model.Id">Delete</a>
+            </td>
+        </tr>
+    </tbody>
+</table>

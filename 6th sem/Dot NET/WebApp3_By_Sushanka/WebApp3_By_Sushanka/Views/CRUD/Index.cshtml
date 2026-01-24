@@ -1,0 +1,55 @@
+﻿@model List<WebApp3_By_Sushanka.Models.Player>;
+
+
+@{
+    ViewData["Title"] = "CRUD";
+}
+
+@if (TempData["SuccessMessage"] != null)
+{
+    @* <div class="alert alert-success" id="flashMessage"> *@
+    <div class="alert alert-success alert-dismissible fade show" role="alert" id="flashMessage">
+        @TempData["SuccessMessage"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+
+<h1>Players</h1>
+
+<a asp-action="AddPlayer">Create</a>
+<table class="table table-striped table-bordered">
+    <thead>
+        <tr>
+        <th>Id</th>
+        <th>Name</th>        
+        <th>Foot</th>
+        <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>        
+        @foreach (var player in Model)
+        {
+            <tr>
+                <td>@player.Id</td>
+                <td>@player.Name</td>
+                                
+                <td>
+                    <img src="./images/@(player.Foot)-foot.png" height="30" width="30" />
+                </td>
+                <td><a asp-action="ViewPlayer" asp-route-id="@player.Id">View</a> 
+                    <a asp-action="EditPlayer" asp-route-id="@player.Id">Edit</a> 
+                    <a asp-action="DeletePlayer" asp-route-id="@player.Id">Delete</a>
+                </td>
+            </tr>            
+        }
+    </tbody>
+</table>
+
+
+@* for flash message *@
+<script>
+    setTimeout(function () {
+        var flash = document.getElementById('flashMessage');
+        if (flash) flash.style.display = 'none';
+    }, 3000); // 3 seconds
+</script>

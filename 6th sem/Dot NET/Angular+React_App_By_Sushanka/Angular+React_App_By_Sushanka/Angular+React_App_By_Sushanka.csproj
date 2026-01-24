@@ -1,0 +1,38 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <RootNamespace>Angular_React_App_By_Sushanka</RootNamespace>
+  </PropertyGroup>
+
+	<Target Name="PublishAngular" AfterTargets="Build">
+		<!-- Install dependencies -->
+		<Exec Command="npm install" WorkingDirectory="../Angular_Standalone" />
+
+		<!-- Build Angular for production -->
+		<Exec Command="npm run build -- --configuration=production --base-href=/angular/" WorkingDirectory="../Angular_Standalone" />
+
+		<ItemGroup>
+			<AngularDistFiles Include="../Angular_Standalone/dist/Angular_Standalone/browser/**" />
+		</ItemGroup>
+
+		<!-- Copy to wwwroot -->
+		<Copy SourceFiles="@(AngularDistFiles)" DestinationFolder="wwwroot/angular/%(RecursiveDir)" SkipUnchangedFiles="true"/>
+	</Target>
+
+	<Target Name="PublishReact" AfterTargets="Build">
+		<!-- Install dependencies -->
+		<Exec Command="npm install" WorkingDirectory="../react_standalone" />
+		<!-- Build React for production -->
+		<!-- <Exec Command="npm run build" WorkingDirectory="../react_standalone" /> -->
+		<Exec Command="npx cross-env PUBLIC_URL=/react npm run build" WorkingDirectory="../react_standalone" />
+
+		<ItemGroup>
+			<ReactDistFiles Include="../react_standalone/build/**" /> 
+		</ItemGroup>
+
+		<Copy SourceFiles="@(ReactDistFiles)" DestinationFolder="wwwroot/react/%(RecursiveDir)" />
+	</Target>
+</Project>

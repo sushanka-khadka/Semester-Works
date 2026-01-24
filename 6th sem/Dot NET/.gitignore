@@ -1,0 +1,10 @@
+.vs/
+bin/
+obj/
+lib/
+
+Migrations/
+static/
+Areas/
+Shared/
+wwwroot/

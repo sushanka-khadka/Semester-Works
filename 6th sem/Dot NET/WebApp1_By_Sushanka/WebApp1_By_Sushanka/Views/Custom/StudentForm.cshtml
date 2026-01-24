@@ -1,0 +1,56 @@
+﻿
+@model WebApp1_By_Sushanka.Models.Student
+
+@{
+    ViewData["Title"] = "StudentForm";
+}
+
+@* <h1>@((string)ViewData["Title"])</h1> *@
+<h1>@ViewData["Title"]</h1>
+@* <h1>@((string)ViewData["Title"])</h1>
+<h1>@ViewData["title"].ToString()</h1> *@
+<hr />
+
+<form asp-action="FormSubmission" method="post">
+    <div class="mb-3">
+        <label asp-for="StdId">Student Id: </label>
+        <input asp-for="StdId" />
+        <span asp-validation-for="StdId" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Name">Name: </label>
+        <input asp-for="Name" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+    
+    <div class="mb-3">
+        <label asp-for="Address">Address: </label>
+        <input asp-for="Address" />
+        <span asp-validation-for="Address" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Faculty">Faculty: </label>
+        <input asp-for="Faculty" />
+        <span asp-validation-for="Faculty" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Age">Age: </label>
+        <input asp-for="Age" />
+        <span asp-validation-for="Age" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Email">Email Address: </label>
+        <input asp-for="Email" />
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div> 
+
+    <button class="btn btn-primary">Create</button>
+</form>
+
+@* client side validationo using unobtrusive validation *@
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+
+

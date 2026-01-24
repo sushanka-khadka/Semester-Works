@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/react/static/css/main.fb665e37.css",
+    "main.js": "/react/static/js/main.028272be.js",
+    "static/js/453.94aa9516.chunk.js": "/react/static/js/453.94aa9516.chunk.js",
+    "static/media/tiger.jpg": "/react/static/media/tiger.c4386f53a62adf6588ba.jpg",
+    "index.html": "/react/index.html",
+    "main.fb665e37.css.map": "/react/static/css/main.fb665e37.css.map",
+    "main.028272be.js.map": "/react/static/js/main.028272be.js.map",
+    "453.94aa9516.chunk.js.map": "/react/static/js/453.94aa9516.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.fb665e37.css",
+    "static/js/main.028272be.js"
+  ]
+}
